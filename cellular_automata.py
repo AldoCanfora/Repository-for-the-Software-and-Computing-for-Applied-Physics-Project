@@ -3,8 +3,8 @@ import random
 from functools import reduce
 
 # window dimension
-WIDTH = 640
-HEIGHT = 480
+WIDTH = 1000
+HEIGHT = 800
 
 # Initialize pygame and window
 pygame.init()
