@@ -7,9 +7,6 @@ from typing import List, Tuple
 WIDTH = 1000
 HEIGHT = 800
 
-Cell = Tuple[int, int]
-Board = List[Cell]
-
 # Initialize pygame and window
 pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -17,16 +14,25 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 # create grid of live o dead cels
 def create_grid(width, height):
     return [[random.randint(0, 1) for j in range(width)] for i in range(height)]
-
-#returns the coordinates of all cells near a cell
-def neighbors(cell: Cell) -> List[Cell]:
-    x, y = cell
-    return [(x+i, y+j) for i in range(-1, 2) for j in range(-1, 2) if (i, j) != (0, 0)]
-
+'''
 # to count number of live neighbors
-def count_live_neighbors(board: Board, cell: Cell) -> int:
-    live_neighbors = [n for n in neighbors(cell) if n in board]
-    return len(live_neighbors)
+def count_neighbors(grid, x, y):
+    neighbors = [grid[(x + i) % len(grid)][(y + j) % len(grid[0])] for i in range(-1, 2) for j in range(-1, 2) if not (i == 0 and j == 0)]
+    return sum(neighbors)
+'''
+def count_neighbors(grid, x, y):
+    num_rows = len(grid)
+    num_cols = len(grid[0])
+    count = 0
+    for i in range(-1, 2):
+        for j in range(-1, 2):
+            if not (i == 0 and j == 0):
+                new_x = x + i
+                new_y = y + j
+                if 0 <= new_x < num_rows and 0 <= new_y < num_cols:
+                    count += grid[new_x][new_y]
+    return count
+
 
 # to update grid according to rules
 def update_cell(grid, x, y):

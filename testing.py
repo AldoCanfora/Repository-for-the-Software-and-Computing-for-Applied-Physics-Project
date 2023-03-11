@@ -1,4 +1,4 @@
-#import pytest
+import pytest
 from cellular_automata import create_grid
 from cellular_automata import count_neighbors
 from cellular_automata import update_cell
@@ -35,42 +35,33 @@ def test_create_grid():
 
 '''
 
-
-
-def test_count_neighbors():
-    grid = [
-        [1, 1, 0],
+@pytest.fixture
+def grid():
+    return [
         [0, 0, 1],
+        [1, 1, 0],
         [0, 1, 0]
     ]
-    assert count_neighbors(grid, 0, 0) == 2
-    assert count_neighbors(grid, 0, 1) == 3
-    assert count_neighbors(grid, 0, 2) == 2
-    assert count_neighbors(grid, 1, 0) == 3
+
+def test_count_neighbors_center(grid):
     assert count_neighbors(grid, 1, 1) == 3
-    assert count_neighbors(grid, 1, 2) == 2
-    assert count_neighbors(grid, 2, 0) == 2
-    assert count_neighbors(grid, 2, 1) == 3
-    assert count_neighbors(grid, 2, 2) == 1
 
-'''
-import pytest
-from main import count_neighbors
-
-def test_count_neighbors():
-    grid = [
-        [1, 0, 1],
-        [0, 1, 0],
-        [1, 0, 1]
-    ]
+def test_count_neighbors_corner(grid):
     assert count_neighbors(grid, 0, 0) == 2
+
+def test_count_neighbors_edge(grid):
     assert count_neighbors(grid, 0, 1) == 3
-    assert count_neighbors(grid, 1, 1) == 4
+
+def test_count_neighbors_wraparound(grid):
+    assert count_neighbors(grid, 0, 2) == 3
+    assert count_neighbors(grid, 2, 0) == 2
     assert count_neighbors(grid, 2, 2) == 2
 
-'''
-
-
+def test_count_neighbors_invalid_coords(grid):
+    with pytest.raises(IndexError):
+        count_neighbors(grid, -1, -1)
+    with pytest.raises(IndexError):
+        count_neighbors(grid, 3, 3)
 
 def test_update_cell():
     # Test con una cella morta e 3 celle vive vicine
