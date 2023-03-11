@@ -14,24 +14,19 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 # create grid of live o dead cels
 def create_grid(width, height):
     return [[random.randint(0, 1) for j in range(width)] for i in range(height)]
-'''
-# to count number of live neighbors
-def count_neighbors(grid, x, y):
-    neighbors = [grid[(x + i) % len(grid)][(y + j) % len(grid[0])] for i in range(-1, 2) for j in range(-1, 2) if not (i == 0 and j == 0)]
-    return sum(neighbors)
-'''
+
 def count_neighbors(grid, x, y):
     num_rows = len(grid)
     num_cols = len(grid[0])
-    count = 0
-    for i in range(-1, 2):
-        for j in range(-1, 2):
-            if not (i == 0 and j == 0):
-                new_x = x + i
-                new_y = y + j
-                if 0 <= new_x < num_rows and 0 <= new_y < num_cols:
-                    count += grid[new_x][new_y]
-    return count
+    neighbor_values = [
+        grid[x+i][y+j]
+        for i in range(-1, 2)
+        for j in range(-1, 2)
+        if not (i == 0 and j == 0)
+        and 0 <= x+i < num_rows
+        and 0 <= y+j < num_cols
+    ]
+    return sum(filter(lambda v: v == 1, neighbor_values))
 
 
 # to update grid according to rules
