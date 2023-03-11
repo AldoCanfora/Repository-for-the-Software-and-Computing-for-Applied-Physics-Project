@@ -18,6 +18,10 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 def create_grid(width, height):
     return [[random.randint(0, 1) for j in range(width)] for i in range(height)]
 
+def neighbors(cell: Cell) -> List[Cell]:
+    x, y = cell
+    return [(x+i, y+j) for i in range(-1, 2) for j in range(-1, 2) if (i, j) != (0, 0)]
+
 # to count number of live neighbors
 def count_neighbors(grid, x, y):
     neighbors = [grid[(x + i) % len(grid)][(y + j) % len(grid[0])] for i in range(-1, 2) for j in range(-1, 2) if not (i == 0 and j == 0)]
