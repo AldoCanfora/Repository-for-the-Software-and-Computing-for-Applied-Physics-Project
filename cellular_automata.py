@@ -18,6 +18,7 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 def create_grid(width, height):
     return [[random.randint(0, 1) for j in range(width)] for i in range(height)]
 
+#returns the coordinates of all cells near a cell
 def neighbors(cell: Cell) -> List[Cell]:
     x, y = cell
     return [(x+i, y+j) for i in range(-1, 2) for j in range(-1, 2) if (i, j) != (0, 0)]
