@@ -24,9 +24,9 @@ def neighbors(cell: Cell) -> List[Cell]:
     return [(x+i, y+j) for i in range(-1, 2) for j in range(-1, 2) if (i, j) != (0, 0)]
 
 # to count number of live neighbors
-def count_neighbors(grid, x, y):
-    neighbors = [grid[(x + i) % len(grid)][(y + j) % len(grid[0])] for i in range(-1, 2) for j in range(-1, 2) if not (i == 0 and j == 0)]
-    return reduce(lambda x, y: x + y, neighbors)
+def count_live_neighbors(board: Board, cell: Cell) -> int:
+    live_neighbors = [n for n in neighbors(cell) if n in board]
+    return len(live_neighbors)
 
 # to update grid according to rules
 def update_cell(grid, x, y):
