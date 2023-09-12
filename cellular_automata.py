@@ -5,7 +5,7 @@ from typing import List, Tuple
 
 # window dimension
 WIDTH = 1000
-HEIGHT = 800
+HEIGHT = 700
 
 # Initialize pygame and window
 pygame.init()
