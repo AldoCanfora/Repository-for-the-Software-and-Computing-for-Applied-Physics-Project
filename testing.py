@@ -5,7 +5,7 @@ from cellular_automata import update_cell
 from cellular_automata import update_grid
 
 
-def test_create_grid():
+'''def test_create_grid():
     grid = create_grid(3, 3)
     assert len(grid) == 3
     assert len(grid[0]) == 3
@@ -13,7 +13,26 @@ def test_create_grid():
     assert len(grid[2]) == 3
     for row in grid:
         for cell in row:
+            assert cell in (0, 1)'''
+
+def test_create_grid():
+    width, height = 1000, 700
+    grid = create_grid(width, height)
+    
+    # check grid dimensions
+    assert len(grid) == height
+    assert len(grid[0]) == width
+
+    # check cell's value: 0 or 1
+    for row in grid:
+        for cell in row:
             assert cell in (0, 1)
+
+    # check that the grid is indeed a list of lists (matrix nxm)
+    assert isinstance(grid, list)
+    for row in grid:
+        assert isinstance(row, list)
+
 
 '''
 import pytest
