@@ -76,11 +76,22 @@ def test_count_neighbors_edge(grid):
 #    assert count_neighbors(grid, 2, 0) == 2
 #    assert count_neighbors(grid, 2, 2) == 2
 
+
+'''def test_count_neighbors_invalid_coords(grid):
+    with pytest.raises(IndexError):
+        count_neighbors(grid, -1, -1)
+    with pytest.raises(IndexError):
+        count_neighbors(grid, 3, 3)'''
 def test_count_neighbors_invalid_coords(grid):
     with pytest.raises(IndexError):
         count_neighbors(grid, -1, -1)
     with pytest.raises(IndexError):
-        count_neighbors(grid, 3, 3)
+        count_neighbors(grid, len(grid), len(grid[0]))
+    with pytest.raises(IndexError):
+        count_neighbors(grid, -1, len(grid[0]))
+    with pytest.raises(IndexError):
+        count_neighbors(grid, len(grid), -1)
+
 
 def test_update_cell():
     # Test con una cella morta e 3 celle vive vicine
