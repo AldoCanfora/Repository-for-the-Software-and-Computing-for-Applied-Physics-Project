@@ -1,3 +1,4 @@
+import numpy as np
 import pygame
 import random
 from functools import reduce
@@ -12,8 +13,12 @@ pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # create grid of live o dead cels
-def create_grid(width, height):
-    return [[random.randint(0, 1) for j in range(width)] for i in range(height)]
+def initial_state_grid(width, height):
+    if width < 2 or height < 2:
+        raise ValueError('Both dimensions of the grid must be >= 2, but are {} and {}'.format(width,height))
+    np.random.seed(1)
+    init_state_grid = np.random.choice([0, 1],size=(height,width)) 
+    return init_state_grid
 
 
 def count_neighbors(grid, x, y):
@@ -51,7 +56,7 @@ def update_grid(grid):
     return [[update_cell(grid, i, j) for j in range(len(grid[0]))] for i in range(len(grid))]
 
 # create initial grid
-grid = create_grid(WIDTH//10, HEIGHT//10)
+grid = initial_state_grid(WIDTH//10, HEIGHT//10)
 
 # Game loop
 running = True
