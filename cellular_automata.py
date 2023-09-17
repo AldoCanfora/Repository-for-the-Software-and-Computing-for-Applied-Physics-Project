@@ -18,15 +18,24 @@ def create_grid(width, height):
 def count_neighbors(grid, x, y):
     num_rows = len(grid)
     num_cols = len(grid[0])
+    
+    # Check if coordinates are valid
+    is_valid_coord = lambda i, j: 0 <= i < num_rows and 0 <= j < num_cols
+
+    # Compute value of neighbor if coordinat is valid, otherwise return 0
+    get_neighbor_value = lambda i, j: grid[i][j] if is_valid_coord(i, j) else 0
+
+    # Generate a list of neighbors's values
     neighbor_values = [
-        grid[x+i][y+j]
+        get_neighbor_value(x+i, y+j)
         for i in range(-1, 2)
         for j in range(-1, 2)
         if not (i == 0 and j == 0)
-        and 0 <= x+i < num_rows
-        and 0 <= y+j < num_cols
     ]
+
+    # Use filter e sum to count alive neighbors
     return sum(filter(lambda v: v == 1, neighbor_values))
+
 
 
 # to update grid according to rules
