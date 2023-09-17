@@ -1,8 +1,26 @@
+import numpy as np
 import pytest
-from cellular_automata import create_grid
-from cellular_automata import count_neighbors
-from cellular_automata import update_cell
-from cellular_automata import update_grid
+import cellular_automata
+import hypothesis
+from hypothesis import strategies as st
+from hypothesis import settings
+from hypothesis import given
+
+@pytest.fixture
+def width():
+    return 1000  
+@pytest.fixture
+def height():
+    return 700   
+
+def test_initial_state_grid(width,height):
+    #Initialazing the model with width*height spins of values 0 and 1."
+    model = cellular_automata.initial_state_grid(height,width) 
+    #Test if the dimensions of the grid are width and height."
+    assert len(model) == width
+    assert len(model[0]) == height
+    #Test if all the values have really the values 0 and 1."
+    assert ((model == 0) | (model == 1)).all()
 
 
 '''def test_create_grid():
@@ -15,7 +33,7 @@ from cellular_automata import update_grid
         for cell in row:
             assert cell in (0, 1)'''
 
-def test_create_grid():
+'''def test_create_grid():
     width, height = 1000, 700
     grid = create_grid(width, height)
     
@@ -31,7 +49,8 @@ def test_create_grid():
     # check that the grid is indeed a list of lists (matrix nxm)
     assert isinstance(grid, list)
     for row in grid:
-        assert isinstance(row, list)
+        assert isinstance(row, list)'''
+
 
 
 '''
