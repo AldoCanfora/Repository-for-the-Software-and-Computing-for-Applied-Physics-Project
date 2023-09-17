@@ -23,46 +23,17 @@ def test_initial_state_grid(width,height):
     assert ((model == 0) | (model == 1)).all()
 
 
-'''def test_create_grid():
-    grid = create_grid(3, 3)
-    assert len(grid) == 3
-    assert len(grid[0]) == 3
-    assert len(grid[1]) == 3
-    assert len(grid[2]) == 3
-    for row in grid:
-        for cell in row:
-            assert cell in (0, 1)'''
-
-'''def test_create_grid():
-    width, height = 1000, 700
-    grid = create_grid(width, height)
-    
-    # check grid dimensions
-    assert len(grid) == height
-    assert len(grid[0]) == width
-
-    # check cell's value: 0 or 1
-    for row in grid:
-        for cell in row:
-            assert cell in (0, 1)
-
-    # check that the grid is indeed a list of lists (matrix nxm)
-    assert isinstance(grid, list)
-    for row in grid:
-        assert isinstance(row, list)'''
-
-
 
 '''
 import pytest
-from main import create_grid
+from main import initial_state_grid
 
 def test_create_grid():
     # Test con dimensioni 0
-    assert create_grid(0, 0) == []
+    assert cellular_automata.initial_state_grid(0, 0) == []
 
     # Test con dimensioni maggiori di 0
-    grid = create_grid(3, 3)
+    grid = cellular_automata.initial_state_grid(3, 3)
     assert len(grid) == 3
     assert len(grid[0]) == 3
 
