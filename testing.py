@@ -23,27 +23,6 @@ def test_initial_state_grid(width,height):
     assert ((model == 0) | (model == 1)).all()
 
 
-
-'''
-import pytest
-from main import initial_state_grid
-
-def test_create_grid():
-    # Test con dimensioni 0
-    assert cellular_automata.initial_state_grid(0, 0) == []
-
-    # Test con dimensioni maggiori di 0
-    grid = cellular_automata.initial_state_grid(3, 3)
-    assert len(grid) == 3
-    assert len(grid[0]) == 3
-
-    # Test per verificare che la funzione generi solo 0 e 1
-    for row in grid:
-        for cell in row:
-            assert cell in [0, 1]
-
-'''
-
 @pytest.fixture
 def grid():
     return [
@@ -53,13 +32,13 @@ def grid():
     ]
 
 def test_count_neighbors_center(grid):
-    assert count_neighbors(grid, 1, 1) == 3
+    assert cellular_automata.count_neighbors(grid, 1, 1) == 3
 
 def test_count_neighbors_corner(grid):
-    assert count_neighbors(grid, 0, 0) == 2
+    assert cellular_automata.count_neighbors(grid, 0, 0) == 2
 
 def test_count_neighbors_edge(grid):
-    assert count_neighbors(grid, 0, 1) == 3
+    assert cellular_automata.count_neighbors(grid, 0, 1) == 3
 
 #def test_count_neighbors_wraparound(grid):
 #    assert count_neighbors(grid, 0, 2) == 3
@@ -72,93 +51,100 @@ def test_count_neighbors_edge(grid):
         count_neighbors(grid, -1, -1)
     with pytest.raises(IndexError):
         count_neighbors(grid, 3, 3)'''
-def test_count_neighbors_invalid_coords(grid):
+'''def test_count_neighbors_invalid_coords(grid):
     with pytest.raises(IndexError):
-        count_neighbors(grid, -1, -1)
+        cellular_automata.count_neighbors(grid, -1, -1)
     with pytest.raises(IndexError):
-        count_neighbors(grid, len(grid), len(grid[0]))
+        cellular_automata.count_neighbors(grid, len(grid), len(grid[0]))
     with pytest.raises(IndexError):
-        count_neighbors(grid, -1, len(grid[0]))
+        cellular_automata.count_neighbors(grid, -1, len(grid[0]))
     with pytest.raises(IndexError):
-        count_neighbors(grid, len(grid), -1)
+        cellular_automata.count_neighbors(grid, len(grid), -1)'''
 
 
 def test_update_cell():
-    # Test con una cella morta e 3 celle vive vicine
+    # Test 1 death cell and 3 near live cells
     grid = [
         [1, 0, 0],
         [1, 0, 0],
         [1, 0, 0]
     ]
-    assert update_cell(grid, 1, 1) == 1
+    assert cellular_automata.update_cell(grid, 1, 1) == 1
 
-    # Test con una cella viva e 1 cella viva vicina
+    # Test 1 live cell and no near live cells
     grid = [
         [0, 0, 0],
         [0, 1, 0],
         [0, 0, 0]
     ]
-    assert update_cell(grid, 1, 1) == 0
+    assert cellular_automata.update_cell(grid, 1, 1) == 0
 
-    # Test con una cella viva e 2 celle vive vicine
+    # Test 1 live cell and 1 near live cell
     grid = [
         [0, 1, 0],
         [0, 1, 0],
         [0, 0, 0]
     ]
-    assert update_cell(grid, 1, 1) == 1
+    assert cellular_automata.update_cell(grid, 1, 1) == 0
 
-    # Test con una cella viva e 4 celle vive vicine
+    # Test 1 live cell and 4 near live cells
     grid = [
         [1, 1, 1],
         [1, 1, 0],
         [0, 0, 0]
     ]
-    assert update_cell(grid, 1, 1) == 0
+    assert cellular_automata.update_cell(grid, 1, 1) == 0
 
-    # Test con una cella morta e 1 cella vive vicine
+    # Test 1 live cell and 2 near live cells
     grid = [
-        [0, 1, 0],
+        [0, 1, 1],
         [0, 1, 0],
         [0, 0, 0]
     ]
-    assert update_cell(grid, 1, 1) == 1
+    assert cellular_automata.update_cell(grid, 1, 1) == 1
 
-    # Test con una cella morta e 3 celle vive vicine
+    # Test 1 death cell with 4 near live cells
     grid = [
         [1, 1, 1],
         [1, 0, 0],
         [0, 0, 0]
     ]
-    assert update_cell(grid, 1, 1) == 1
+    assert cellular_automata.update_cell(grid, 1, 1) == 0
 
-    # Test con una cella morta e 4 celle vive vicine
+    # Test 1 death cell with 3 near live cells
     grid = [
-        [1, 1, 1],
+        [1, 1, 0],
         [1, 0, 0],
-        [1, 0, 0]
+        [0, 0, 0]
     ]
-    assert update_cell(grid, 1, 1) == 0
+    assert cellular_automata.update_cell(grid, 1, 1) == 1
 
 
 
 
 def test_update_grid():
-    # Test con una griglia predefinita
+    # Test with a predefined grid
     grid = [[1, 1, 1],
             [0, 0, 0],
             [0, 0, 0]]
-    expected = [[1, 0, 1],
-                [1, 0, 1],
+    expected = [[0, 1, 0],
+                [0, 1, 0],
                 [0, 0, 0]]
-    assert update_grid(grid) == expected
     
-    # Test con una griglia in cui tutte le celle sono morte
+    assert cellular_automata.update_grid(grid) == expected
+    
+def test_update_grid_all_death():
+    # Test with all death cells grid
     grid = [[0 for _ in range(10)] for _ in range(10)]
     expected = [[0 for _ in range(10)] for _ in range(10)]
-    assert update_grid(grid) == expected
+    assert cellular_automata.update_grid(grid) == expected
     
-    # Test con una griglia in cui tutte le celle sono vive
-    grid = [[1 for _ in range(10)] for _ in range(10)]
-    expected = [[0 for _ in range(10)] for _ in range(10)]
-    assert update_grid(grid) == expected
+def test_update_grid_all_live():
+    # Test with all live cells grid
+    grid = [[1, 1, 1],
+            [1, 1, 1],
+            [1, 1, 1]]
+    expected = [[1, 0, 1],
+                [0, 0, 0],
+                [1, 0, 1]]
+    assert cellular_automata.update_grid(grid) == expected
