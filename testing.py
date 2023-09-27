@@ -6,19 +6,22 @@ from hypothesis import strategies as st
 from hypothesis import settings
 from hypothesis import given
 
-@pytest.fixture
-def width():
-    return 1000  
-@pytest.fixture
-def height():
-    return 700   
+# Read WIDTH and HEIGHT value from configuration.txt file
+config_values = {}
+with open('configuration.txt', 'r') as config_file:
+    for line in config_file:
+        key, value = line.strip().split('=')
+        config_values[key] = int(value)
 
-def test_initial_state_grid(width,height):
+
+
+@given(N=st.integers(1, config_values['WIDTH']), M=st.integers(1, config_values['HEIGHT']))    
+def test_initial_state_grid(WIDTH,HEIGHT):
     #Initialazing the model with width*height spins of values 0 and 1."
-    model = cellular_automata.initial_state_grid(height,width) 
+    model = cellular_automata.initial_state_grid(HEIGHT,WIDTH) 
     #Test if the dimensions of the grid are width and height."
-    assert len(model) == width
-    assert len(model[0]) == height
+    assert len(model) == WIDTH
+    assert len(model[0]) == HEIGHT
     #Test if all the values have really the values 0 and 1."
     assert ((model == 0) | (model == 1)).all()
 
