@@ -6,7 +6,7 @@ WIDTH = 1000
 HEIGHT = 700
 
 # Initialize pygame and window
-pygame.init()
+#pygame.init()
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # create grid of live o dead cels
