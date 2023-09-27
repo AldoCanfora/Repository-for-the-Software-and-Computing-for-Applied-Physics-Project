@@ -1,8 +1,5 @@
 import numpy as np
 import pygame
-import random
-from functools import reduce
-from typing import List, Tuple
 
 # window dimension
 WIDTH = 1000
