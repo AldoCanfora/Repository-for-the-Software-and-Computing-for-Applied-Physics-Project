@@ -55,5 +55,19 @@ Conway identifies three distinctive emergent forms.
 - “Blinker”
 - “Movers” which include “Gliders”, which move across the grid.
 
-  
+![config](./images/still_life.jpg)
+In figure above, an example of a still life. The pattern stabilizes into a fixed form.
+
+![config](./images/other_stable_forms.jpg)
+There are also other stable forms such as those shown in the figure above.
+
+![config](./images/blinker.jpg)
+In figre above an example of a blinker, which is a pattern that oscillates with a fixed period,
+that is, after n iterations the pattern returns to a previously visited state. In the example
+this pattern has period 2.
+
+![config](./images/glider.jpg)
+The glider is a repeating pattern that travels across the grid. Their movement is diagonal in cellular grid  
+and after one period come back to initial pattern and this procedure continues.
+Therefore important feature of gliders is their movement in cellular grid. Figure above shows a glider whit period 4. 
 
