@@ -208,3 +208,31 @@ def test_loaf():
                 [0, 1, 0, 1],
                 [0, 0, 1, 0]]
     assert cellular_automata.update_grid(grid) == expected
+
+
+def test_glider():
+    # Test glider emergent form
+    state_0 = [[0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [1, 1, 1, 0],
+            [0, 0, 0, 0]]
+    state_1 = [[0, 0, 0, 0],
+                [1, 0, 1, 0],
+                [0, 1, 1, 0],
+                [0, 1, 0, 0]]
+    state_2 = [[0, 0, 0, 0],
+                [0, 0, 1, 0],
+                [1, 0, 1, 0],
+                [0, 1, 1, 0]]
+    state_3 = [[0, 0, 0, 0],
+                [0, 1, 0, 0],
+                [0, 0, 1, 1],
+                [0, 1, 1, 0]]
+    state_4 = [[0, 0, 0, 0],
+                [0, 0, 1, 0],
+                [0, 0, 0, 1],
+                [0, 1, 1, 1]]
+    assert cellular_automata.update_grid(state_0) == state_1
+    assert cellular_automata.update_grid(state_1) == state_2
+    assert cellular_automata.update_grid(state_2) == state_3
+    assert cellular_automata.update_grid(state_3) == state_4
