@@ -15,4 +15,4 @@ time, and is applied to the whole grid simultaneously.
 ![This cellular automaton is a grid composed by 25 cells. The set of neighbor-
 hood is called Moore Neighborhood and it is defined on a two-dimensional square lattice
 and it is composed of a central cell and the eight cells that surround it, here indicated
-with initials of cardinal points.](.images/neighbors_image.jpg)
+with initials of cardinal points.](![neighbors_image](https://github.com/AldoCanfora/Repository-for-the-Software-and-Computing-for-Applied-Physics-Project/assets/72471366/2b0bbc6c-ad82-44dd-b62f-a82cc07f4657))
