@@ -173,3 +173,14 @@ def test_blinker():
                 [1, 1, 1],
                 [0, 0, 0]]
     assert cellular_automata.update_grid(grid) == expected
+
+
+def test_boat():
+    # Test boat emergent form
+    grid = [[1, 1, 0],
+            [1, 0, 1],
+            [0, 1, 0]]
+    expected = [[1, 1, 0],
+                [1, 0, 1],
+                [0, 1, 0]]
+    assert cellular_automata.update_grid(grid) == expected
