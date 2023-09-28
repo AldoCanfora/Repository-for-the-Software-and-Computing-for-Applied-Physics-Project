@@ -166,13 +166,15 @@ def test_still_life_square_form():
 
 def test_blinker():
     # Test blinker emergent form with switch cross shape
-    grid = [[0, 1, 0],
-            [0, 1, 0],
-            [0, 1, 0]]
-    expected = [[0, 0, 0],
+    state_0 = [[0, 1, 0],
+                [0, 1, 0],
+                [0, 1, 0]]
+    state_1 = [[0, 0, 0],
                 [1, 1, 1],
                 [0, 0, 0]]
-    assert cellular_automata.update_grid(grid) == expected
+    assert cellular_automata.update_grid(state_0) == state_1
+    assert cellular_automata.update_grid(state_1) == state_0
+
 
 
 def test_boat():
