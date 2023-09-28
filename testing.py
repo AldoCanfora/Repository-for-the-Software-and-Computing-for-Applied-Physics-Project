@@ -151,3 +151,15 @@ def test_update_grid_all_live():
                 [0, 0, 0],
                 [1, 0, 1]]
     assert cellular_automata.update_grid(grid) == expected
+
+
+def test_still_life_square_form():
+    # Test still life emergent form with square shape
+    grid = [[0, 0, 0],
+            [0, 1, 1],
+            [0, 1, 1]]
+    expected = [[0, 0, 0],
+                [0, 1, 1],
+                [0, 1, 1]]
+    assert cellular_automata.update_grid(grid) == expected
+
