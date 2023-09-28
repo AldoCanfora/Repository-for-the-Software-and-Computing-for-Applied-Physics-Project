@@ -184,3 +184,14 @@ def test_boat():
                 [1, 0, 1],
                 [0, 1, 0]]
     assert cellular_automata.update_grid(grid) == expected
+
+
+def test_beehive():
+    # Test beehive emergent form
+    grid = [[0, 1, 1, 0],
+            [1, 0, 0, 1],
+            [0, 1, 1, 0]]
+    expected = [[0, 1, 1, 0],
+                [1, 0, 0, 1],
+                [0, 1, 1, 0]]
+    assert cellular_automata.update_grid(grid) == expected
