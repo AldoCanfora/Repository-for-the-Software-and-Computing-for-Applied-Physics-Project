@@ -13,7 +13,7 @@ current state of the cell and the states of the cells in its neighborhood. The
 rule for updating the state of cells is the same for each cell and does not change over
 time, and is applied to the whole grid simultaneously.
 
-![neighbors_image](https://github.com/AldoCanfora/Repository-for-the-Software-and-Computing-for-Applied-Physics-Project/assets/72471366/af504c1c-2317-4ed6-9e42-57537e1fad7f)
+![config](./images/neighbors_imagejpg)
 
 In the above figure, this cellular automaton is a grid composed by 25 cells. The set of neighbor-
 hood is called Moore Neighborhood and it is defined on a two-dimensional square lattice
