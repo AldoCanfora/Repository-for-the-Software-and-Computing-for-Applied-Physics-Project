@@ -56,12 +56,15 @@ Conway identifies three distinctive emergent forms.
 - “Movers” which include “Gliders”, which move across the grid.
 
 ![config](./images/still_life.jpg)
+
 In figure above, an example of a still life. The pattern stabilizes into a fixed form.
 
 ![config](./images/other_stable_forms.jpg)
+
 There are also other stable forms such as those shown in the figure above.
 
 ![config](./images/blinker.jpg)
+
 In figre above an example of a blinker, which is a pattern that oscillates with a fixed period,
 that is, after n iterations the pattern returns to a previously visited state. In the example
 this pattern has period 2.
