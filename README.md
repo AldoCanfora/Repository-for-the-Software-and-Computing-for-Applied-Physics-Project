@@ -1,3 +1,4 @@
+![neighbors_image](https://github.com/AldoCanfora/Repository-for-the-Software-and-Computing-for-Applied-Physics-Project/assets/72471366/af504c1c-2317-4ed6-9e42-57537e1fad7f)
 # Repository-for-the-Software-and-Computing-for-Applied-Physics-Project
 
 A cellular automaton is a discrete model of computation studied in automata theory. 
