@@ -1,5 +1,6 @@
 # Repository-for-the-Software-and-Computing-for-Applied-Physics-Project
 
+## Cellular Automaton
 A cellular automaton is a discrete model of computation studied in automata theory. 
 Cellular automata have found application in various areas, including physics, theoretical
 biology and microstructure modeling.
@@ -19,4 +20,17 @@ In the above figure, this cellular automaton is a grid composed by 25 cells. The
 hood is called Moore Neighborhood and it is defined on a two-dimensional square lattice
 and it is composed of a central cell and the eight cells that surround it, here indicated
 with initials of cardinal points.
+
+ ## Conway’s Game of Life
+The Game of Life, also known simply as Life, is a cellular automaton devised by the
+British mathematician John Horton Conway in 1970. It is a zero-player game,
+meaning that its evolution is determined by its initial state, requiring no further input.
+One interacts with the Game of Life by creating an initial configuration and observing
+how it evolves. It is Turing complete and can simulate a universal constructor or any
+other Turing machine. The universe of the Game of Life is an infinite, two-dimensional
+orthogonal grid of square cells, each of which is in one of two possible states, live or
+dead (or populated and unpopulated, respectively). Every cell interacts with its eight
+neighbours, which are the cells that are horizontally, vertically, or diagonally adjacent.
+At each step in time, the following transitions occur:
+ 
 
