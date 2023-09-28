@@ -12,3 +12,7 @@ a mathematical function) that determines the new state of each cell in terms of 
 current state of the cell and the states of the cells in its neighborhood. The
 rule for updating the state of cells is the same for each cell and does not change over
 time, and is applied to the whole grid simultaneously.
+![This cellular automaton is a grid composed by 25 cells. The set of neighbor-
+hood is called Moore Neighborhood and it is defined on a two-dimensional square lattice
+and it is composed of a central cell and the eight cells that surround it, here indicated
+with initials of cardinal points.](.images/neighbors_image.jpg)
