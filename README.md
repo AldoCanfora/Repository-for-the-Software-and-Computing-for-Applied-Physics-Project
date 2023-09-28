@@ -50,6 +50,12 @@ and deaths occur simultaneously, and the discrete moment at which this happens i
 sometimes called a tick.
 The rules continue to be applied repeatedly to create further generations.
 
+### Emergent forms
+As is a property of complex systems, the operation of these rules produces emergent new forms, with properties that are not
+predictable from the initial conditions. These new forms and properties do not involve
+changes in initial conditions, since the counters are unchanged, but in the emergent
+forms, the configurations that emerge, and their properties.
+
 Conway identifies three distinctive emergent forms. 
 - “Still life”
 - “Blinker”
