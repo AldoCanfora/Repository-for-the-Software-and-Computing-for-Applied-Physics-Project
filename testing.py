@@ -163,3 +163,13 @@ def test_still_life_square_form():
                 [0, 1, 1]]
     assert cellular_automata.update_grid(grid) == expected
 
+
+def test_blinker():
+    # Test blinker emergent form with switch cross shape
+    grid = [[0, 1, 0],
+            [0, 1, 0],
+            [0, 1, 0]]
+    expected = [[0, 0, 0],
+                [1, 1, 1],
+                [0, 0, 0]]
+    assert cellular_automata.update_grid(grid) == expected
