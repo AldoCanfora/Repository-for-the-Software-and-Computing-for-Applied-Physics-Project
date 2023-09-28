@@ -195,3 +195,16 @@ def test_beehive():
                 [1, 0, 0, 1],
                 [0, 1, 1, 0]]
     assert cellular_automata.update_grid(grid) == expected
+
+
+def test_loaf():
+    # Test loaf emergent form
+    grid = [[0, 1, 1, 0],
+            [1, 0, 0, 1],
+            [0, 1, 0, 1],
+            [0, 0, 1, 0]]
+    expected = [[0, 1, 1, 0],
+                [1, 0, 0, 1],
+                [0, 1, 0, 1],
+                [0, 0, 1, 0]]
+    assert cellular_automata.update_grid(grid) == expected
