@@ -80,3 +80,6 @@ The glider is a repeating pattern that travels across the grid. Their movement i
 and after one period come back to initial pattern and this procedure continues.
 Therefore important feature of gliders is their movement in cellular grid. Figure above shows a glider whit period 4. 
 
+
+## Structure of the project
+
