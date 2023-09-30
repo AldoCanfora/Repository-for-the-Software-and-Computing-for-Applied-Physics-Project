@@ -141,6 +141,7 @@ def test_still_life_square_form():
                 [0, 1, 1],
                 [0, 1, 1]]
     assert cellular_automata.update_grid(grid) == expected
+    assert cellular_automata.update_grid(expected) == grid
 
 
 def test_blinker():
@@ -165,6 +166,7 @@ def test_boat():
                 [1, 0, 1],
                 [0, 1, 0]]
     assert cellular_automata.update_grid(grid) == expected
+    assert cellular_automata.update_grid(expected) == grid
 
 
 def test_beehive():
@@ -176,6 +178,7 @@ def test_beehive():
                 [1, 0, 0, 1],
                 [0, 1, 1, 0]]
     assert cellular_automata.update_grid(grid) == expected
+    assert cellular_automata.update_grid(expected) == grid
 
 
 def test_loaf():
@@ -189,6 +192,7 @@ def test_loaf():
                 [0, 1, 0, 1],
                 [0, 0, 1, 0]]
     assert cellular_automata.update_grid(grid) == expected
+    assert cellular_automata.update_grid(expected) == grid
 
 
 def test_glider():
