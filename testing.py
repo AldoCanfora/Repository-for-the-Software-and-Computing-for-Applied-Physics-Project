@@ -42,28 +42,7 @@ def test_count_neighbors_corner(grid):
 
 def test_count_neighbors_edge(grid):
     assert cellular_automata.count_neighbors(grid, 0, 1) == 3
-
-#def test_count_neighbors_wraparound(grid):
-#    assert count_neighbors(grid, 0, 2) == 3
-#    assert count_neighbors(grid, 2, 0) == 2
-#    assert count_neighbors(grid, 2, 2) == 2
-
-
-'''def test_count_neighbors_invalid_coords(grid):
-    with pytest.raises(IndexError):
-        count_neighbors(grid, -1, -1)
-    with pytest.raises(IndexError):
-        count_neighbors(grid, 3, 3)'''
-'''def test_count_neighbors_invalid_coords(grid):
-    with pytest.raises(IndexError):
-        cellular_automata.count_neighbors(grid, -1, -1)
-    with pytest.raises(IndexError):
-        cellular_automata.count_neighbors(grid, len(grid), len(grid[0]))
-    with pytest.raises(IndexError):
-        cellular_automata.count_neighbors(grid, -1, len(grid[0]))
-    with pytest.raises(IndexError):
-        cellular_automata.count_neighbors(grid, len(grid), -1)'''
-
+    
 
 def test_update_cell():
     # Test 1 death cell and 3 near live cells
