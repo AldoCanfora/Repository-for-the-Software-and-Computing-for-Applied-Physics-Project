@@ -84,7 +84,7 @@ Therefore important feature of gliders is their movement in cellular grid. Figur
 ## Structure of the project
 These are the steps in order to start the program and to plot the results:
 
-First, the user has to choose between the different dimension of the grid (in our case there is only one, [configuration](configuration.txt)) and eventually write a new one, using the syntax of configuration; if the user wants to do so, he has to specify the grid parameters (WIDTH, HEIGHT). The actual grid used in [cellular_automata](cellular_automata.py) is scaled by going to divide both WIDTH and HEIGHT by 10, approximating the result by default to the nearest integer.
+First, the user has to choose between the different dimension of the grid (in our case there is only one, [configuration](configuration.txt)) and eventually write a new one, using the syntax of configuration; if the user wants to do so, he has to specify the grid parameters (WIDTH, HEIGHT). The actual grid used in [cellular_automata](cellular_automata.py) is scaled by going to divide both WIDTH and HEIGHT by 10, approximating the result by default to the nearest integer. The minimum selectable values WIDTH and HEIGHT are greater than 20, to have a grid of at least 2 by 2.
 Then, to start the Conway's Game of Life algortihm the user has to launch the file [cellular_automata](cellular_automata.py) which imports its parameters from [configuration](configuration.txt). 
 Running the file [cellular_automata](cellular_automata.py), with the command entered by the user **"python cellular_automata.py"**, through the pygame library, will display a window where you can see the time evolution of the Conway's Game of Life.
 
