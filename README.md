@@ -80,3 +80,22 @@ The glider is a repeating pattern that travels across the grid. Their movement i
 and after one period come back to initial pattern and this procedure continues.
 Therefore important feature of gliders is their movement in cellular grid. Figure above shows a glider whit period 4. 
 
+
+## Structure of the project
+These are the steps in order to start the program and to plot the results:
+
+First, the user has to choose between the different dimension of the grid (in our case there is only one, [configuration](configuration.txt)) and eventually write a new one, using the syntax of configuration; if the user wants to do so, he has to specify the grid parameters (WIDTH, HEIGHT). The actual grid used in [cellular_automata](cellular_automata.py) is scaled by going to divide both WIDTH and HEIGHT by 10, approximating the result by default to the nearest integer.
+Then, to start the Conway's Game of Life algortihm the user has to launch the file [cellular_automata](cellular_automata.py) which imports its parameters from [configuration](configuration.txt). 
+Running the file [cellular_automata](cellular_automata.py), with the command entered by the user **"python cellular_automata.py"**, through the pygame library, will display a window where you can see the time evolution of the Conway's Game of Life.
+
+This is how I divided my project into blocks:
+
+- In the file [cellular_automata](cellular_automata.py) I have built the Conway's Game of life functions that initialize the grid, count the number of neighbors in each cell, update the grid state, display the grid state in real time. 
+
+- In the file [testing](testing.py) I have tested all the [cellular_automata](cellular_automata.py) functions to ensure that all of them work properly, using hypothesis testing for the test function about the initialization of the grid. For the other functions to be tested, I used examples of grids on which to make asserts. In addition, I included testing functions for special cases and emergent forms.
+
+- In the file [configuration](configuration.txt) there are the definitions of the parameters used in the [cellular_automata](cellular_automata.py) e [testing](testing.py), there are definitions of the grid size measurement WIDTH and HEIGHT.
+
+
+
+
