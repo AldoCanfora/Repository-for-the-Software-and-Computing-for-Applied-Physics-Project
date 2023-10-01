@@ -92,7 +92,7 @@ This is how I divided my project into blocks:
 
 - In the file [cellular_automata](cellular_automata.py) I have built the Conway's Game of life functions that initialize the grid, count the number of neighbors in each cell, update the grid state, display the grid state in real time. 
 
-- In the file [testing](testing.py) I have tested all the [cellular_automata](cellular_automata.py) functions to ensure that all of them work properly, using hypothesis testing for the test function about the initialization of the grid. For the other functions to be tested, I used examples of grids on which to make asserts. In addition, I included testing functions for special cases and emergent forms.
+- In the file [testing](testing.py) I have tested all the [cellular_automata](cellular_automata.py) functions to ensure that all of them work properly, using hypothesis testing for the test function about the initialization of the grid. For the other functions to be tested, I used examples of grids on which to make asserts. In addition, I included testing functions for special cases, such as all live cells or all death cells, and emergent forms.
 
 - In the file [configuration](configuration.txt) there are the definitions of the parameters used in the [cellular_automata](cellular_automata.py) e [testing](testing.py), there are definitions of the grid size measurement WIDTH and HEIGHT.
 
