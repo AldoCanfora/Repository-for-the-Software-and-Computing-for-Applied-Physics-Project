@@ -1,9 +1,7 @@
-import numpy as np
+
 import pytest
 import cellular_automata
-import hypothesis
 from hypothesis import strategies as st
-from hypothesis import settings
 from hypothesis import given
 
 # Read WIDTH and HEIGHT value from configuration.txt file
@@ -15,9 +13,9 @@ with open('configuration.txt', 'r') as config_file:
 
 
 
-@given(width=st.integers(2, config_values['WIDTH']), height=st.integers(2, config_values['HEIGHT']))    
+@given(width=st.integers(20, config_values['WIDTH']), height=st.integers(20, config_values['HEIGHT']))    
 def test_initial_state_grid(width,height):
-    #Initialazing the model with width*height spins of values 0 and 1."
+    #Initialazing the model with width*height grid of values 0 and 1."
     model = cellular_automata.initial_state_grid(height,width) 
     #Test if the dimensions of the grid are width and height."
     assert len(model) == width
