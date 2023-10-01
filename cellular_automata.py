@@ -1,9 +1,15 @@
 import numpy as np
 import pygame
 
-# window dimension
-WIDTH = 1000
-HEIGHT = 700
+# Read WIDTH and HEIGHT value from configuration.txt file
+config_values = {}
+with open('configuration.txt', 'r') as config_file:
+    for line in config_file:
+        key, value = line.strip().split('=')
+        config_values[key] = int(value)
+
+WIDTH = config_values.get('WIDTH') 
+HEIGHT = config_values.get('HEIGHT')
 
 # Initialize pygame and window
 #pygame.init()
