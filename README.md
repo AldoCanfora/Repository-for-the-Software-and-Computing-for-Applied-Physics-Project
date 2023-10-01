@@ -97,7 +97,7 @@ This is how I divided my project into blocks:
 - In the file [configuration](configuration.txt) there are the definitions of the parameters used in the [cellular_automata](cellular_automata.py) e [testing](testing.py), there are definitions of the grid size measurement WIDTH and HEIGHT.
   
 
-In the images folder I have included some images to understand Conway's Game of life theory and an example of the output of [cellular_automata](cellular_automata.py).
+In the [images](images) folder I have included some images to understand Conway's Game of life theory and an example of the output of [cellular_automata](cellular_automata.py).
 
 In the figure below I show a frame of a state of the [cellular_automata](cellular_automata.py) viewed through the Pygame window.
 ![config](./images/conway_s_game_of_life_algorithm_frame_output.jpg)
