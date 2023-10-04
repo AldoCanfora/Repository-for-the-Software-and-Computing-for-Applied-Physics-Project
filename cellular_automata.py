@@ -38,6 +38,25 @@ def initial_state_grid(width, height):
 
 
 def count_neighbors(grid, x, y):
+    """
+    Count the number of alive neighbors for a cell in a binary grid.
+
+    Parameters:
+        grid (list): The binary grid representing the current state.
+        x (int): The x-coordinate of the cell to count neighbors for.
+        y (int): The y-coordinate of the cell to count neighbors for.
+
+    Returns:
+        int: The number of alive neighbors (value equal to 1) for the specified cell.
+
+    Note:
+        This function counts the number of alive neighbors for a cell in the grid.
+        It considers the 8 neighboring cells (top, bottom, left, right, and diagonals).
+
+    Examples:
+        Given a binary grid, you can use this function to count the number of alive neighbors for a specific cell.
+        alive_neighbors = count_neighbors(binary_grid, x, y)
+    """
     num_rows = len(grid)
     num_cols = len(grid[0])
     
