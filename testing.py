@@ -124,6 +124,75 @@ Raises:
     AssertionError: If the count of neighbors for the edge cell is not equal to the expected count.
     """    
     assert cellular_automata.count_neighbors(grid, 0, 1) == 3
+
+
+@pytest.fixture
+def grid_death():
+    return [
+        [1, 1, 0],
+        [0, 0, 1],
+        [1, 0, 1]
+    ]
+
+def test_count_neighbors_center_for_death_cell(grid_death):
+    """
+Test the counting of neighbors for a cell at the center of the grid_death.
+
+This test function verifies that the 'count_neighbors' function correctly counts the number of neighboring cells
+for a death cell located at the center of the grid_death.
+
+Args:
+    grid_death (list[list[int]]): A 2D grid representing the cellular automaton.
+
+Test Steps:
+1. Calls the 'count_neighbors' function with the provided 'grid_death', in above grid_death() function, and coordinates (1, 1) 
+   representing the center cell.
+2. Asserts that the function returns the expected count of neighbors for the center cell.
+
+Raises:
+    AssertionError: If the count of neighbors for the center cell is not equal to the expected count.
+    """
+    assert cellular_automata.count_neighbors(grid_death, 1, 1) == 5
+
+def test_count_neighbors_corner_for_death_cell(grid_death):
+    """
+Test the counting of neighbors for a cell at the corner of the grid_death.
+
+This test function verifies that the 'count_neighbors' function correctly counts the number of neighboring cells
+for a death cell located at the corner of the grid_death.
+
+Args:
+    grid_death (list[list[int]]): A 2D grid representing the cellular automaton.
+
+Test Steps:
+1. Calls the 'count_neighbors' function with the provided 'grid_death', in above grid() function, and coordinates (0, 2) 
+   representing the center cell.
+2. Asserts that the function returns the expected count of neighbors for the corner cell.
+
+Raises:
+    AssertionError: If the count of neighbors for the corner cell is not equal to the expected count.
+    """
+    assert cellular_automata.count_neighbors(grid_death, 0, 2) == 2
+
+def test_count_neighbors_edge_for_death_cell(grid_death):
+    """
+Test the counting of neighbors for a cell at the edge of the grid_death.
+
+This test function verifies that the 'count_neighbors' function correctly counts the number of neighboring cells
+for a death cell located at the edge of the grid_death.
+
+Args:
+    grid_death (list[list[int]]): A 2D grid representing the cellular automaton.
+
+Test Steps:
+1. Calls the 'count_neighbors' function with the provided 'grid_death', in above grid() function, and coordinates (2, 1) 
+   representing the center cell.
+2. Asserts that the function returns the expected count of neighbors for the edge cell.
+
+Raises:
+    AssertionError: If the count of neighbors for the edge cell is not equal to the expected count.
+    """    
+    assert cellular_automata.count_neighbors(grid_death, 2, 1) == 3
     
 
 def test_update_cell_death_to_live():
