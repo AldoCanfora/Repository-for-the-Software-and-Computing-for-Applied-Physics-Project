@@ -90,6 +90,23 @@ def update_cell(grid, x, y):
         return 1 if count == 3 else 0
 
 def update_grid(grid):
+    """
+    Update the entire binary grid based on Conway's Game of Life rules.
+
+    Parameters:
+        grid (list): The binary grid representing the current state.
+
+    Returns:
+        list: A new binary grid representing the updated state based on the rules.
+
+    Note:
+        This function applies the rules of Conway's Game of Life to each cell in the input grid
+        and generates a new grid as the next state.
+
+    Examples:
+        Given an initial grid, you can use this function to obtain the next generation grid.
+        updated_grid = update_grid(initial_grid)
+    """
     return [[update_cell(grid, i, j) for j in range(len(grid[0]))] for i in range(len(grid))]
 
 # create initial grid
