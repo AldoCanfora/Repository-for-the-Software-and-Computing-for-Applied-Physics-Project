@@ -10,6 +10,7 @@ with open('configuration.txt', 'r') as config_file:
 
 WIDTH = config_values.get('WIDTH') 
 HEIGHT = config_values.get('HEIGHT')
+seed_value = config_values.get('seed_value')
 
 # Initialize pygame and window
 #pygame.init()
@@ -32,7 +33,7 @@ def initial_state_grid(width, height):
     """
     if width < 2 or height < 2:
         raise ValueError('Both dimensions of the grid must be >= 2, but are {} and {}'.format(width,height))
-    np.random.seed(1)
+    np.random.seed(seed_value)
     init_state_grid = np.random.choice([0, 1],size=(height,width)) 
     return init_state_grid
 
