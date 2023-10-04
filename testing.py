@@ -477,11 +477,11 @@ def test_still_life_square_form():
     # Test still life emergent form with square shape
     grid = [[0, 0, 0, 0],
             [0, 1, 1, 0],
-            [0, 1, 1, 0]
+            [0, 1, 1, 0],
             [0, 0, 0, 0]]
     expected = [[0, 0, 0, 0],
                 [0, 1, 1, 0],
-                [0, 1, 1, 0]
+                [0, 1, 1, 0],
                 [0, 0, 0, 0]]
     assert cellular_automata.update_grid(grid) == expected
     assert cellular_automata.update_grid(expected) == grid
