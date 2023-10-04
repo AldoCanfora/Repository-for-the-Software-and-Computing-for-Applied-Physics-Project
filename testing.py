@@ -36,15 +36,12 @@ Raises:
 Example Usage:
     test_initial_state_grid(10, 20)  # Test with a 10x20 grid.
     """
-
+    
     #Initialazing the model with width*height grid of values 0 and 1."
-    model = cellular_automata.initial_state_grid(height,width) 
+    model = cellular_automata.initial_state_grid(height, width, seed_value) 
     #Test if the dimensions of the grid are width and height."
     assert len(model) == width
     assert len(model[0]) == height
-
-    # Set the random seed to the provided 'seed_value'.
-    np.random.seed(seed_value)
     #Test if all the values have really the values 0 and 1."
     assert ((model == 0) | (model == 1)).all()
 
