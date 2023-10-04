@@ -87,9 +87,9 @@ def update_cell(grid, x, y):
         If grid[x][y] == 0 (dead cell) and count_neighbors(grid, x, y) is 3, the cell becomes alive (returns 1).
     """
     count = count_neighbors(grid, x, y)
-    if grid[x][y] == 1: # considero le celle vive
+    if grid[x][y] == 1: # considering live cells
         return 1 if count in [2, 3] else 0
-    else: # considero le celle morte
+    else: # considering death cells
         return 1 if count == 3 else 0
 
 def update_grid(grid):
