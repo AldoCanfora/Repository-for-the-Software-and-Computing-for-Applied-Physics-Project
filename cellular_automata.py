@@ -1,5 +1,4 @@
 import numpy as np
-import parameters
 
 # create grid of live o dead cels
 def initial_state_grid(width, height, seed_value):
