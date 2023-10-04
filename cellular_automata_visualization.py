@@ -2,6 +2,21 @@ import cellular_automata
 import pygame
 import parameters
 
+"""
+This script demonstrates a simple cellular automaton simulation using pygame for visualization.
+
+It initializes a pygame window and creates an initial grid for the cellular automaton. The game loop allows you to 
+visualize the automaton's evolution as it updates the grid and displays it on the screen.
+
+Usage:
+1. Make sure you have the 'cellular_automata', 'pygame', and 'parameters' modules imported or defined.
+2. Run the script, and a pygame window will open with the cellular automaton simulation.
+3. You can close the window by clicking the close button.
+
+Requirements:
+- pygame: You need to have pygame installed to run this script.
+"""
+
 # Initialize pygame and window
 screen = pygame.display.set_mode((parameters.WIDTH, parameters.HEIGHT))
 
