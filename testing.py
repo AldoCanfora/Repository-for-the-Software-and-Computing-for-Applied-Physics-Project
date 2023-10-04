@@ -1,4 +1,3 @@
-
 import pytest
 import cellular_automata
 from hypothesis import strategies as st
