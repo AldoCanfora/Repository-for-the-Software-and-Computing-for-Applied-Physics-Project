@@ -2,7 +2,7 @@ import numpy as np
 import parameters
 
 # create grid of live o dead cels
-def initial_state_grid(width, height):
+def initial_state_grid(width, height, seed_value):
     """
     Generate a random binary grid as the initial state configuration.
 
@@ -18,7 +18,7 @@ def initial_state_grid(width, height):
     """
     if width < 2 or height < 2:
         raise ValueError('Both dimensions of the grid must be >= 2, but are {} and {}'.format(width,height))
-    np.random.seed(parameters.seed_value)
+    np.random.seed(seed_value)
     init_state_grid = np.random.choice([0, 1],size=(height,width)) 
     return init_state_grid
 
