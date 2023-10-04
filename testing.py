@@ -437,8 +437,12 @@ Raises:
     AssertionError: If the updated grid is not equal to the expected updated grid.
     """
     # Test with all death cells grid
-    grid = [[0 for _ in range(10)] for _ in range(10)]
-    expected = [[0 for _ in range(10)] for _ in range(10)]
+    grid = [[0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]]
+    expected =  [[0, 0, 0],
+                 [0, 0, 0],
+                 [0, 0, 0]]
     assert cellular_automata.update_grid(grid) == expected
     
 def test_update_grid_all_live():
