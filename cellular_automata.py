@@ -161,28 +161,3 @@ def update_grid(grid):
         updated_grid = update_grid(initial_grid)
     """
     return [[update_cell(grid, i, j) for j in range(len(grid[0]))] for i in range(len(grid))]
-
-# create initial grid
-grid = initial_state_grid(WIDTH//10, HEIGHT//10)
-
-# Game loop
-running = True
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # draw grid
-    for i, row in enumerate(grid):
-        for j, cell in enumerate(row):
-            color = (255, 255, 255) if cell == 1 else (0, 0, 0)
-            pygame.draw.rect(screen, color, (j*10, i*10, 10, 10))
-
-    # update grid
-    grid = update_grid(grid)
-
-    # update screen
-    pygame.display.update()
-
-# clean and quit pygame
-pygame.quit()
