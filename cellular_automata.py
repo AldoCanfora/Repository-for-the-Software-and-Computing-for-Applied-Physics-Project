@@ -48,15 +48,14 @@ def count_neighbors(grid, x, y):
     get_neighbor_value = lambda i, j: grid[i][j] if is_valid_coord(i, j) else 0
 
     # Generate a list of neighbors's values
-    neighbor_values = [
-        get_neighbor_value(x+i, y+j)
+    alive_neighbors = sum(
+        get_neighbor_value(x+i, y+j) == 1
         for i in range(-1, 2)
         for j in range(-1, 2)
         if not (i == 0 and j == 0)
-    ]
+    )
 
-    # Use filter e sum to count alive neighbors
-    return sum(filter(lambda v: v == 1, neighbor_values))
+    return alive_neighbors
 
 
 
