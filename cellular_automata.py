@@ -1,12 +1,19 @@
 import numpy as np
 import pygame
 
-# Read WIDTH and HEIGHT value from configuration.txt file
+# Prompt the user to enter the filename
+filename = input("Enter configuration filename: ")
+
 config_values = {}
-with open('configuration.txt', 'r') as config_file:
-    for line in config_file:
-        key, value = line.strip().split('=')
-        config_values[key] = int(value)
+try:
+    with open(filename, 'r') as config_file:
+        for line in config_file:
+            key, value = line.strip().split('=')
+            config_values[key] = int(value)
+except FileNotFoundError:
+    print(f"The file '{filename}' was not found.")
+except Exception as e:
+    print(f"An error occurred: {e}")
 
 WIDTH = config_values.get('WIDTH') 
 HEIGHT = config_values.get('HEIGHT')
