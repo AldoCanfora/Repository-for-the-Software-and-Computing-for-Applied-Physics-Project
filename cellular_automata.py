@@ -17,6 +17,19 @@ screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
 # create grid of live o dead cels
 def initial_state_grid(width, height):
+    """
+    Generate a random binary grid as the initial state configuration.
+
+    Parameters:
+        width (int): The width of the grid.
+        height (int): The height of the grid.
+
+    Returns:
+        numpy.ndarray: A grid of random binary values (0 or 1) with the specified dimensions.
+
+    Raises:
+        ValueError: If either width or height is less than 2.
+    """
     if width < 2 or height < 2:
         raise ValueError('Both dimensions of the grid must be >= 2, but are {} and {}'.format(width,height))
     np.random.seed(1)
