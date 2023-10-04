@@ -1,18 +1,19 @@
 import pytest
 import cellular_automata
 from hypothesis import strategies as st
-from hypothesis import given
 
-# Read WIDTH and HEIGHT value from configuration.txt file
-config_values = {}
-with open('configuration.txt', 'r') as config_file:
-    for line in config_file:
-        key, value = line.strip().split('=')
-        config_values[key] = int(value)
+@pytest.fixture
+def width():
+    return 1000 
 
+@pytest.fixture
+def height():
+    return 700  
 
+@pytest.fixture
+def seed_value():
+    return 1  
 
-@given(width=st.integers(20, config_values['WIDTH']), height=st.integers(20, config_values['HEIGHT']))    
 def test_initial_state_grid(width,height):
     #Initialazing the model with width*height grid of values 0 and 1."
     model = cellular_automata.initial_state_grid(height,width) 
