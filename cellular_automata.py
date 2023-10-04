@@ -62,6 +62,27 @@ def count_neighbors(grid, x, y):
 
 # to update grid according to rules
 def update_cell(grid, x, y):
+    """
+    Update the state of a cell in a binary grid based on Conway's Game of Life rules.
+
+    Parameters:
+        grid (numpy.ndarray): The binary grid representing the current state.
+        x (int): The x-coordinate of the cell to update.
+        y (int): The y-coordinate of the cell to update.
+
+    Returns:
+        int: The updated state of the cell (1 for alive, 0 for dead) based on the rules.
+
+    Note:
+        This function follows the rules of Conway's Game of Life:
+        - If a live cell has 2 or 3 live neighbors, it remains alive; otherwise, it dies.
+        - If a dead cell has exactly 3 live neighbors, it becomes alive.
+
+    Examples:
+        If grid[x][y] == 1 (live cell) and count_neighbors(grid, x, y) is 2 or 3, the cell remains alive.
+        If grid[x][y] == 1 (live cell) and count_neighbors(grid, x, y) is not 2 or 3, the cell dies (returns 0).
+        If grid[x][y] == 0 (dead cell) and count_neighbors(grid, x, y) is 3, the cell becomes alive (returns 1).
+    """
     count = count_neighbors(grid, x, y)
     if grid[x][y] == 1: # considero le celle vive
         return 1 if count in [2, 3] else 0
