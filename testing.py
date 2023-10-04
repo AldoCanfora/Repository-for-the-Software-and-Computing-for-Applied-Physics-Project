@@ -315,6 +315,25 @@ Raises:
 
 
 def test_update_grid():
+    """
+Test the update of the entire cellular automaton grid.
+
+This test function verifies the update of the entire grid based on the rules of the cellular automaton Conway's game of life.
+
+Test Steps:
+1. Initializes a grid with specific values, where 1 represents a live cell, and 0 represents a dead cell.
+2. Calls the 'update_grid' function with the provided 'grid' to update the entire grid.
+3. Asserts that the function returns the expected updated grid.
+
+Note:
+- In this test case, we test the update of a predefined grid where live (1) and dead (0) cells are arranged in a 
+  specific pattern shown in grid, cell (0,0) beacame alive, cell (0,1) stay alive, cell (0,0) and (0,2) became death, and
+  other cells stay death.
+- The 'expected' grid represents the state of the grid after one update cycle based on the rules of the cellular automaton.
+
+Raises:
+    AssertionError: If the updated grid is not equal to the expected updated grid.
+    """
     # Test with a predefined grid
     grid = [[1, 1, 1],
             [0, 0, 0],
@@ -326,12 +345,46 @@ def test_update_grid():
     assert cellular_automata.update_grid(grid) == expected
     
 def test_update_grid_all_death():
+    """
+Test the update of the entire cellular automaton grid.
+
+This test function verifies the update of the entire grid based on the rules of the cellular automaton Conway's game of life.
+
+Test Steps:
+1. Initializes a grid with specific values, where 1 represents a live cell, and 0 represents a dead cell.
+2. Calls the 'update_grid' function with the provided 'grid' to update the entire grid.
+3. Asserts that the function returns the expected updated grid.
+
+Note:
+- In this test case, we test the update of a predefined grid where all cells are death (0). 
+- The 'expected' grid represents the state of the grid after one update cycle based on the rules of the cellular automaton.
+
+Raises:
+    AssertionError: If the updated grid is not equal to the expected updated grid.
+    """
     # Test with all death cells grid
     grid = [[0 for _ in range(10)] for _ in range(10)]
     expected = [[0 for _ in range(10)] for _ in range(10)]
     assert cellular_automata.update_grid(grid) == expected
     
 def test_update_grid_all_live():
+    """
+Test the update of the entire cellular automaton grid.
+
+This test function verifies the update of the entire grid based on the rules of the cellular automaton Conway's game of life.
+
+Test Steps:
+1. Initializes a grid with specific values, where 1 represents a live cell, and 0 represents a dead cell.
+2. Calls the 'update_grid' function with the provided 'grid' to update the entire grid.
+3. Asserts that the function returns the expected updated grid.
+
+Note:
+- In this test case, we test the update of a predefined grid where all cells are alive (1). 
+- The 'expected' grid represents the state of the grid after one update cycle based on the rules of the cellular automaton.
+
+Raises:
+    AssertionError: If the updated grid is not equal to the expected updated grid.
+    """
     # Test with all live cells grid
     grid = [[1, 1, 1],
             [1, 1, 1],
