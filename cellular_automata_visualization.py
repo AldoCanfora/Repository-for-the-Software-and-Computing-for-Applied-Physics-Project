@@ -37,16 +37,16 @@ if __name__ == "__main__":
         with open(filename, 'r') as config_file:
             for line in config_file:
                 key, value = line.strip().split('=')
-                config_values[key] = int(value)
+                config_values[key] = value
     except FileNotFoundError:
         print(f"The file '{filename}' was not found.")
     except Exception as e:
         print(f"An error occurred: {e}")
 
-    WIDTH = config_values.get('WIDTH') 
-    HEIGHT = config_values.get('HEIGHT')
-    seed_value = config_values.get('seed_value')
-
+    WIDTH = int(config_values.get('WIDTH'))
+    HEIGHT = int(config_values.get('HEIGHT'))
+    seed_value = int(config_values.get('seed_value'))
+    borders = config_values.get('borders')
 
 
 
@@ -85,7 +85,16 @@ while running:
             pygame.draw.rect(screen, color, (j*10, i*10, 10, 10))
 
     # update grid
-    grid = cellular_automata.update_grid(grid)
+    if borders == 'death':
+        grid = cellular_automata.update_grid_death_borders(grid)
+    elif borders == 'circular':
+        grid = cellular_automata.update_grid_circular_borders(grid)
+    elif borders == 'symmetric':
+        grid = cellular_automata.update_grid_symmetric_borders(grid)
+    elif borders == 'alive':
+        grid = cellular_automata.update_grid_alive_borders(grid)
+    else:
+        raise ValueError('Borders parameter must be set as: death, alive, symmetric or circular')
 
     # update screen
     pygame.display.update()
