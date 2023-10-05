@@ -1,3 +1,4 @@
-WIDTH=1000
-HEIGHT=700
+WIDTH=3000
+HEIGHT=3000
 seed_value=1
+borders=symmetric
