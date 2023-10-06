@@ -1,4 +1,4 @@
-WIDTH=1000
-HEIGHT=700
+WIDTH=100
+HEIGHT=100
 seed_value=1
-borders=symmetric
+border_type=death
