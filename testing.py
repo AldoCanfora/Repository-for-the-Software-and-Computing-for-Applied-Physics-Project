@@ -15,7 +15,7 @@ def seed_value():
     return 1
 
 @pytest.fixture
-def borders():
+def border_type():
     return 'death'
 
 def test_initial_state_grid(width,height,seed_value):
@@ -84,7 +84,10 @@ Example Usage:
     ]
     test_count_neighbors_center(grid)  # Expected result is 3.
     """
-    assert cellular_automata.count_neighbors(grid, 1, 1) == 3
+    assert cellular_automata.count_neighbors(grid, 1, 1, 'death') == 3
+    assert cellular_automata.count_neighbors(grid, 1, 1, 'alive') == 7
+    assert cellular_automata.count_neighbors(grid, 1, 1, 'reflective') == 3
+    assert cellular_automata.count_neighbors(grid, 1, 1, 'circular') == 3
 
 def test_count_neighbors_corner(grid):
     """
@@ -104,7 +107,10 @@ Test Steps:
 Raises:
     AssertionError: If the count of neighbors for the corner cell is not equal to the expected count.
     """
-    assert cellular_automata.count_neighbors(grid, 0, 0) == 2
+    assert cellular_automata.count_neighbors(grid, 0, 0, 'death') == 2
+    assert cellular_automata.count_neighbors(grid, 0, 0, 'alive') == 3
+    assert cellular_automata.count_neighbors(grid, 0, 0, 'reflective') == 3
+    assert cellular_automata.count_neighbors(grid, 0, 0, 'circular') == 3
 
 def test_count_neighbors_edge(grid):
     """
@@ -124,7 +130,7 @@ Test Steps:
 Raises:
     AssertionError: If the count of neighbors for the edge cell is not equal to the expected count.
     """    
-    assert cellular_automata.count_neighbors(grid, 0, 1) == 3
+    assert cellular_automata.count_neighbors(grid, 0, 1, border_type) == 3
 
 
 @pytest.fixture
@@ -248,7 +254,7 @@ Raises:
         [0, 1, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1) == 0
+    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 0
 
 def test_update_cell_live_with_one_neighbor():
     """
@@ -275,7 +281,7 @@ Raises:
         [0, 1, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1) == 0
+    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 0
 
 def test_update_cell_live_with_4_neighbors():
     """
@@ -302,7 +308,7 @@ Raises:
         [1, 1, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1) == 0
+    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 0
 
 
 def test_update_cell_live_with_2_neighbors():
@@ -330,7 +336,7 @@ Raises:
         [0, 1, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1) == 1
+    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 1
 
 def test_update_cell_death_with_4_neighbors():
     """
@@ -357,7 +363,7 @@ Raises:
         [1, 0, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1) == 0
+    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 0
 
 def test_update_cell_death_with_3_neighbors():
     """
@@ -384,7 +390,7 @@ Raises:
         [1, 0, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1) == 1
+    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 1
 
 
 
@@ -417,7 +423,7 @@ Raises:
                 [0, 1, 0],
                 [0, 0, 0]]
     
-    assert cellular_automata.update_grid(grid) == expected
+    assert cellular_automata.update_grid(grid, border_type) == expected
     
 def test_update_grid_all_death():
     """
@@ -444,7 +450,7 @@ Raises:
     expected =  [[0, 0, 0],
                  [0, 0, 0],
                  [0, 0, 0]]
-    assert cellular_automata.update_grid(grid) == expected
+    assert cellular_automata.update_grid(grid, border_type) == expected
     
 def test_update_grid_all_live():
     """
@@ -471,7 +477,7 @@ Raises:
     expected = [[1, 0, 1],
                 [0, 0, 0],
                 [1, 0, 1]]
-    assert cellular_automata.update_grid(grid) == expected
+    assert cellular_automata.update_grid(grid, border_type) == expected
 
 
 def test_still_life_square_form():
@@ -484,8 +490,8 @@ def test_still_life_square_form():
                 [0, 1, 1, 0],
                 [0, 1, 1, 0],
                 [0, 0, 0, 0]]
-    assert cellular_automata.update_grid(grid) == expected
-    assert cellular_automata.update_grid(expected) == grid
+    assert cellular_automata.update_grid(grid, border_type) == expected
+    assert cellular_automata.update_grid(expected, border_type) == grid
 
 
 def test_blinker():
@@ -496,8 +502,8 @@ def test_blinker():
     state_1 = [[0, 0, 0],
                 [1, 1, 1],
                 [0, 0, 0]]
-    assert cellular_automata.update_grid(state_0) == state_1
-    assert cellular_automata.update_grid(state_1) == state_0
+    assert cellular_automata.update_grid(state_0, border_type) == state_1
+    assert cellular_automata.update_grid(state_1, border_type) == state_0
 
 
 
@@ -509,8 +515,8 @@ def test_boat():
     expected = [[1, 1, 0],
                 [1, 0, 1],
                 [0, 1, 0]]
-    assert cellular_automata.update_grid(grid) == expected
-    assert cellular_automata.update_grid(expected) == grid
+    assert cellular_automata.update_grid(grid, border_type) == expected
+    assert cellular_automata.update_grid(expected, border_type) == grid
 
 
 def test_beehive():
@@ -521,8 +527,8 @@ def test_beehive():
     expected = [[0, 1, 1, 0],
                 [1, 0, 0, 1],
                 [0, 1, 1, 0]]
-    assert cellular_automata.update_grid(grid) == expected
-    assert cellular_automata.update_grid(expected) == grid
+    assert cellular_automata.update_grid(grid, border_type) == expected
+    assert cellular_automata.update_grid(expected, border_type) == grid
 
 
 def test_loaf():
@@ -535,8 +541,8 @@ def test_loaf():
                 [1, 0, 0, 1],
                 [0, 1, 0, 1],
                 [0, 0, 1, 0]]
-    assert cellular_automata.update_grid(grid) == expected
-    assert cellular_automata.update_grid(expected) == grid
+    assert cellular_automata.update_grid(grid, border_type) == expected
+    assert cellular_automata.update_grid(expected, border_type) == grid
 
 
 def test_glider():
@@ -561,7 +567,7 @@ def test_glider():
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
                 [0, 1, 1, 1]]
-    assert cellular_automata.update_grid(state_0) == state_1
-    assert cellular_automata.update_grid(state_1) == state_2
-    assert cellular_automata.update_grid(state_2) == state_3
-    assert cellular_automata.update_grid(state_3) == state_4
+    assert cellular_automata.update_grid(state_0, border_type) == state_1
+    assert cellular_automata.update_grid(state_1, border_type) == state_2
+    assert cellular_automata.update_grid(state_2, border_type) == state_3
+    assert cellular_automata.update_grid(state_3, border_type) == state_4
