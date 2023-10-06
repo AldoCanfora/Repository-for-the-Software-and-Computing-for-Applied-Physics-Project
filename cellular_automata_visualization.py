@@ -46,7 +46,7 @@ if __name__ == "__main__":
     WIDTH = int(config_values.get('WIDTH'))
     HEIGHT = int(config_values.get('HEIGHT'))
     seed_value = int(config_values.get('seed_value'))
-    borders = config_values.get('borders')
+    border_type = config_values.get('border_type')
 
 
 
@@ -85,16 +85,7 @@ while running:
             pygame.draw.rect(screen, color, (j*10, i*10, 10, 10))
 
     # update grid
-    if borders == 'death':
-        grid = cellular_automata.update_grid_death_borders(grid)
-    elif borders == 'circular':
-        grid = cellular_automata.update_grid_circular_borders(grid)
-    elif borders == 'symmetric':
-        grid = cellular_automata.update_grid_symmetric_borders(grid)
-    elif borders == 'alive':
-        grid = cellular_automata.update_grid_alive_borders(grid)
-    else:
-        raise ValueError('Borders parameter must be set as: death, alive, symmetric or circular')
+    grid = cellular_automata.update_grid(grid, border_type)
 
     # update screen
     pygame.display.update()
