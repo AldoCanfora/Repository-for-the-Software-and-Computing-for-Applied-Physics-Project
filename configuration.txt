@@ -1,4 +1,4 @@
 WIDTH=100
 HEIGHT=100
 seed_value=1
-border_type=death
+border_type=reflective

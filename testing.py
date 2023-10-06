@@ -14,9 +14,6 @@ def height():
 def seed_value():
     return 1
 
-@pytest.fixture
-def border_type():
-    return 'death'
 
 def test_initial_state_grid(width,height,seed_value):
     """
@@ -58,9 +55,10 @@ def grid():
         [0, 1, 0]
     ]
 
+
 def test_count_neighbors_center(grid):
     """
-Test the counting of neighbors for a cell at the center of the grid.
+Test the counting of neighbors for a cell at the center of the grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies that the 'count_neighbors' function correctly counts the number of neighboring cells
 for a cell located at the center of the grid.
@@ -82,16 +80,17 @@ Example Usage:
         [1, 1, 0],
         [0, 1, 0]
     ]
-    test_count_neighbors_center(grid)  # Expected result is 3.
+    test_count_neighbors_center(grid)  # Expected result is 3 for border_type death
     """
     assert cellular_automata.count_neighbors(grid, 1, 1, 'death') == 3
-    assert cellular_automata.count_neighbors(grid, 1, 1, 'alive') == 7
+    assert cellular_automata.count_neighbors(grid, 1, 1, 'alive') == 3
     assert cellular_automata.count_neighbors(grid, 1, 1, 'reflective') == 3
-    assert cellular_automata.count_neighbors(grid, 1, 1, 'circular') == 3
+    assert cellular_automata.count_neighbors(grid, 1, 1, 'toroidal') == 3
+
 
 def test_count_neighbors_corner(grid):
     """
-Test the counting of neighbors for a cell at the corner of the grid.
+Test the counting of neighbors for a cell at the corner of the grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies that the 'count_neighbors' function correctly counts the number of neighboring cells
 for a cell located at the corner of the grid.
@@ -108,13 +107,14 @@ Raises:
     AssertionError: If the count of neighbors for the corner cell is not equal to the expected count.
     """
     assert cellular_automata.count_neighbors(grid, 0, 0, 'death') == 2
-    assert cellular_automata.count_neighbors(grid, 0, 0, 'alive') == 3
+    assert cellular_automata.count_neighbors(grid, 0, 0, 'alive') == 7
     assert cellular_automata.count_neighbors(grid, 0, 0, 'reflective') == 3
-    assert cellular_automata.count_neighbors(grid, 0, 0, 'circular') == 3
+    assert cellular_automata.count_neighbors(grid, 0, 0, 'toroidal') == 4
+
 
 def test_count_neighbors_edge(grid):
     """
-Test the counting of neighbors for a cell at the edge of the grid.
+Test the counting of neighbors for a cell at the edge of the grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies that the 'count_neighbors' function correctly counts the number of neighboring cells
 for a cell located at the edge of the grid.
@@ -130,7 +130,10 @@ Test Steps:
 Raises:
     AssertionError: If the count of neighbors for the edge cell is not equal to the expected count.
     """    
-    assert cellular_automata.count_neighbors(grid, 0, 1, border_type) == 3
+    assert cellular_automata.count_neighbors(grid, 0, 1, 'death') ==3
+    assert cellular_automata.count_neighbors(grid, 0, 1, 'alive') == 6
+    assert cellular_automata.count_neighbors(grid, 0, 1, 'reflective') == 4
+    assert cellular_automata.count_neighbors(grid, 0, 1, 'toroidal') == 4
 
 
 @pytest.fixture
@@ -143,7 +146,7 @@ def grid_death():
 
 def test_count_neighbors_center_for_death_cell(grid_death):
     """
-Test the counting of neighbors for a cell at the center of the grid_death.
+Test the counting of neighbors for a cell at the center of the grid_death for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies that the 'count_neighbors' function correctly counts the number of neighboring cells
 for a death cell located at the center of the grid_death.
@@ -159,11 +162,15 @@ Test Steps:
 Raises:
     AssertionError: If the count of neighbors for the center cell is not equal to the expected count.
     """
-    assert cellular_automata.count_neighbors(grid_death, 1, 1) == 5
+    assert cellular_automata.count_neighbors(grid_death, 1, 1, 'death') == 5
+    assert cellular_automata.count_neighbors(grid_death, 1, 1, 'alive') == 5
+    assert cellular_automata.count_neighbors(grid_death, 1, 1, 'reflective') == 5
+    assert cellular_automata.count_neighbors(grid_death, 1, 1, 'toroidal') == 5
+
 
 def test_count_neighbors_corner_for_death_cell(grid_death):
     """
-Test the counting of neighbors for a cell at the corner of the grid_death.
+Test the counting of neighbors for a cell at the corner of the grid_death for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies that the 'count_neighbors' function correctly counts the number of neighboring cells
 for a death cell located at the corner of the grid_death.
@@ -179,11 +186,15 @@ Test Steps:
 Raises:
     AssertionError: If the count of neighbors for the corner cell is not equal to the expected count.
     """
-    assert cellular_automata.count_neighbors(grid_death, 0, 2) == 2
+    assert cellular_automata.count_neighbors(grid_death, 0, 2, 'death') == 2
+    assert cellular_automata.count_neighbors(grid_death, 0, 2, 'alive') == 7
+    assert cellular_automata.count_neighbors(grid_death, 0, 2, 'reflective') == 4
+    assert cellular_automata.count_neighbors(grid_death, 0, 2, 'toroidal') == 5
+
 
 def test_count_neighbors_edge_for_death_cell(grid_death):
     """
-Test the counting of neighbors for a cell at the edge of the grid_death.
+Test the counting of neighbors for a cell at the edge of the grid_death for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies that the 'count_neighbors' function correctly counts the number of neighboring cells
 for a death cell located at the edge of the grid_death.
@@ -199,12 +210,15 @@ Test Steps:
 Raises:
     AssertionError: If the count of neighbors for the edge cell is not equal to the expected count.
     """    
-    assert cellular_automata.count_neighbors(grid_death, 2, 1) == 3
+    assert cellular_automata.count_neighbors(grid_death, 2, 1, 'death') == 3
+    assert cellular_automata.count_neighbors(grid_death, 2, 1, 'alive') == 6
+    assert cellular_automata.count_neighbors(grid_death, 2, 1, 'reflective') == 5
+    assert cellular_automata.count_neighbors(grid_death, 2, 1, 'toroidal') == 5
     
 
 def test_update_cell_death_to_live():
     """
-Test the update of a cell in the cellular automaton grid.
+Test the update of a cell in the cellular automaton grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies the update of a cell in the grid based on the rules of the cellular automaton Conway's game of life.
 
@@ -227,11 +241,15 @@ Raises:
         [1, 0, 0],
         [1, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1) == 1
+    assert cellular_automata.update_cell(grid, 1, 1, 'death') == 1
+    assert cellular_automata.update_cell(grid, 1, 1, 'alive') == 1
+    assert cellular_automata.update_cell(grid, 1, 1, 'reflective') == 1
+    assert cellular_automata.update_cell(grid, 1, 1, 'toroidal') == 1
+
 
 def test_update_cell_live_to_death():
     """
-Test the update of a cell in the cellular automaton grid.
+Test the update of a cell in the cellular automaton grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies the update of a cell in the grid based on the rules of the cellular automaton Conway's game of life.
 
@@ -254,11 +272,15 @@ Raises:
         [0, 1, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'death') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'alive') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'reflective') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'toroidal') == 0
+
 
 def test_update_cell_live_with_one_neighbor():
     """
-Test the update of a cell in the cellular automaton grid.
+Test the update of a cell in the cellular automaton grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies the update of a cell in the grid based on the rules of the cellular automaton Conway's game of life.
 
@@ -281,11 +303,15 @@ Raises:
         [0, 1, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'death') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'alive') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'reflective') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'toroidal') == 0
+
 
 def test_update_cell_live_with_4_neighbors():
     """
-Test the update of a cell in the cellular automaton grid.
+Test the update of a cell in the cellular automaton grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies the update of a cell in the grid based on the rules of the cellular automaton Conway's game of life.
 
@@ -308,12 +334,15 @@ Raises:
         [1, 1, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'death') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'alive') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'reflective') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'toroidal') == 0
 
 
 def test_update_cell_live_with_2_neighbors():
     """
-Test the update of a cell in the cellular automaton grid.
+Test the update of a cell in the cellular automaton grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies the update of a cell in the grid based on the rules of the cellular automaton Conway's game of life.
 
@@ -336,11 +365,15 @@ Raises:
         [0, 1, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 1
+    assert cellular_automata.update_cell(grid, 1, 1, 'death') == 1
+    assert cellular_automata.update_cell(grid, 1, 1, 'alive') == 1
+    assert cellular_automata.update_cell(grid, 1, 1, 'reflective') == 1
+    assert cellular_automata.update_cell(grid, 1, 1, 'toroidal') == 1
+
 
 def test_update_cell_death_with_4_neighbors():
     """
-Test the update of a cell in the cellular automaton grid.
+Test the update of a cell in the cellular automaton grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies the update of a cell in the grid based on the rules of the cellular automaton Conway's game of life.
 
@@ -363,11 +396,15 @@ Raises:
         [1, 0, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'death') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'alive') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'reflective') == 0
+    assert cellular_automata.update_cell(grid, 1, 1, 'toroidal') == 0
+
 
 def test_update_cell_death_with_3_neighbors():
     """
-Test the update of a cell in the cellular automaton grid.
+Test the update of a cell in the cellular automaton grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies the update of a cell in the grid based on the rules of the cellular automaton Conway's game of life.
 
@@ -390,14 +427,15 @@ Raises:
         [1, 0, 0],
         [0, 0, 0]
     ]
-    assert cellular_automata.update_cell(grid, 1, 1, border_type) == 1
-
-
+    assert cellular_automata.update_cell(grid, 1, 1, 'death') == 1
+    assert cellular_automata.update_cell(grid, 1, 1, 'alive') == 1
+    assert cellular_automata.update_cell(grid, 1, 1, 'reflective') == 1
+    assert cellular_automata.update_cell(grid, 1, 1, 'toroidal') == 1
 
 
 def test_update_grid():
     """
-Test the update of the entire cellular automaton grid.
+Test the update of the entire cellular automaton grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies the update of the entire grid based on the rules of the cellular automaton Conway's game of life.
 
@@ -419,15 +457,28 @@ Raises:
     grid = [[1, 1, 1],
             [0, 0, 0],
             [0, 0, 0]]
-    expected = [[0, 1, 0],
-                [0, 1, 0],
-                [0, 0, 0]]
+    expected_1 = [[0, 1, 0],
+                  [0, 1, 0],
+                  [0, 0, 0]]
+    expected_2 = [[0, 0, 0],
+                  [0, 1, 0],
+                  [0, 1, 0]]
+    expected_3 = [[0, 0, 0],
+                  [1, 1, 1],
+                  [0, 0, 0]]
+    expected_4 = [[1, 1, 1],
+                  [1, 1, 1],
+                  [1, 1, 1]]
     
-    assert cellular_automata.update_grid(grid, border_type) == expected
+    assert cellular_automata.update_grid(grid, 'death') == expected_1
+    assert cellular_automata.update_grid(grid, 'alive') == expected_2
+    assert cellular_automata.update_grid(grid, 'reflective') == expected_3
+    assert cellular_automata.update_grid(grid, 'toroidal') == expected_4
     
+
 def test_update_grid_all_death():
     """
-Test the update of the entire cellular automaton grid.
+Test the update of the entire cellular automaton grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies the update of the entire grid based on the rules of the cellular automaton Conway's game of life.
 
@@ -447,14 +498,21 @@ Raises:
     grid = [[0, 0, 0],
             [0, 0, 0],
             [0, 0, 0]]
-    expected =  [[0, 0, 0],
-                 [0, 0, 0],
-                 [0, 0, 0]]
-    assert cellular_automata.update_grid(grid, border_type) == expected
+    expected_1 =  [[0, 0, 0],
+                   [0, 0, 0],
+                   [0, 0, 0]]
+    expected_2 =  [[0, 1, 0],
+                   [1, 0, 1],
+                   [0, 1, 0]]
+    assert cellular_automata.update_grid(grid, 'death') == expected_1
+    assert cellular_automata.update_grid(grid, 'alive') == expected_2
+    assert cellular_automata.update_grid(grid, 'reflective') == expected_1
+    assert cellular_automata.update_grid(grid, 'toroidal') == expected_1
     
+
 def test_update_grid_all_live():
     """
-Test the update of the entire cellular automaton grid.
+Test the update of the entire cellular automaton grid for different borders type (death, alive, reflective, toroidal).
 
 This test function verifies the update of the entire grid based on the rules of the cellular automaton Conway's game of life.
 
@@ -474,10 +532,17 @@ Raises:
     grid = [[1, 1, 1],
             [1, 1, 1],
             [1, 1, 1]]
-    expected = [[1, 0, 1],
-                [0, 0, 0],
-                [1, 0, 1]]
-    assert cellular_automata.update_grid(grid, border_type) == expected
+    expected_1 = [[1, 0, 1],
+                  [0, 0, 0],
+                  [1, 0, 1]]
+    expected_2 = [[0, 0, 0],
+                  [0, 0, 0],
+                  [0, 0, 0]]
+    
+    assert cellular_automata.update_grid(grid, 'death') == expected_1
+    assert cellular_automata.update_grid(grid, 'alive') == expected_2
+    assert cellular_automata.update_grid(grid, 'reflective') == expected_2
+    assert cellular_automata.update_grid(grid, 'toroidal') == expected_2
 
 
 def test_still_life_square_form():
@@ -490,8 +555,14 @@ def test_still_life_square_form():
                 [0, 1, 1, 0],
                 [0, 1, 1, 0],
                 [0, 0, 0, 0]]
-    assert cellular_automata.update_grid(grid, border_type) == expected
-    assert cellular_automata.update_grid(expected, border_type) == grid
+    assert cellular_automata.update_grid(grid, 'death') == expected
+    assert cellular_automata.update_grid(expected, 'death') == grid
+    assert cellular_automata.update_grid(grid, 'alive') == expected
+    assert cellular_automata.update_grid(expected, 'alive') == grid
+    assert cellular_automata.update_grid(grid, 'reflective') == expected
+    assert cellular_automata.update_grid(expected, 'reflective') == grid
+    assert cellular_automata.update_grid(grid, 'toroidal') == expected
+    assert cellular_automata.update_grid(expected, 'toroidal') == grid
 
 
 def test_blinker():
@@ -502,9 +573,27 @@ def test_blinker():
     state_1 = [[0, 0, 0],
                 [1, 1, 1],
                 [0, 0, 0]]
-    assert cellular_automata.update_grid(state_0, border_type) == state_1
-    assert cellular_automata.update_grid(state_1, border_type) == state_0
-
+    state_2 =  [[0, 0, 0],
+                [0, 1, 0],
+                [0, 0, 0]]
+    state_3 = [[0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0]]
+    state_4 = [[1, 1, 1],
+                [1, 1, 1],
+                [1, 1, 1]]
+    state_5 =  [[1, 1, 1],
+                [1, 1, 1],
+                [1, 1, 1]]
+    
+    assert cellular_automata.update_grid(state_0, 'death') == state_1
+    assert cellular_automata.update_grid(state_1, 'death') == state_0
+    assert cellular_automata.update_grid(state_0, 'alive') == state_2
+    assert cellular_automata.update_grid(state_2, 'alive') == state_3
+    assert cellular_automata.update_grid(state_0, 'reflective') == state_4
+    assert cellular_automata.update_grid(state_4, 'reflective') == state_3
+    assert cellular_automata.update_grid(state_0, 'toroidal') == state_5
+    assert cellular_automata.update_grid(state_5, 'toroidal') == state_3
 
 
 def test_boat():
@@ -512,11 +601,30 @@ def test_boat():
     grid = [[1, 1, 0],
             [1, 0, 1],
             [0, 1, 0]]
-    expected = [[1, 1, 0],
-                [1, 0, 1],
-                [0, 1, 0]]
-    assert cellular_automata.update_grid(grid, border_type) == expected
-    assert cellular_automata.update_grid(expected, border_type) == grid
+    expected_1 = [[1, 1, 0],
+                  [1, 0, 1],
+                  [0, 1, 0]]
+    expected_2 = [[0, 0, 0],
+                  [0, 0, 0],
+                  [0, 0, 0]]
+    expected_3 = [[0, 1, 0],
+                  [1, 0, 1],
+                  [0, 1, 0]]
+    expected_4 = [[0, 0, 0],
+                  [0, 0, 1],
+                  [0, 1, 0]]
+    expected_5 = [[0, 0, 0],
+                  [0, 0, 1],
+                  [0, 1, 0]]
+
+    assert cellular_automata.update_grid(grid, 'death') == expected_1
+    assert cellular_automata.update_grid(expected_1, 'death') == grid
+    assert cellular_automata.update_grid(grid, 'alive') == expected_2
+    assert cellular_automata.update_grid(expected_2, 'alive') == expected_3
+    assert cellular_automata.update_grid(grid, 'reflective') == expected_4
+    assert cellular_automata.update_grid(expected_4, 'reflective') == expected_5
+    assert cellular_automata.update_grid(grid, 'toroidal') == expected_2
+    assert cellular_automata.update_grid(expected_2, 'toroidal') == expected_2
 
 
 def test_beehive():
@@ -524,11 +632,24 @@ def test_beehive():
     grid = [[0, 1, 1, 0],
             [1, 0, 0, 1],
             [0, 1, 1, 0]]
-    expected = [[0, 1, 1, 0],
-                [1, 0, 0, 1],
-                [0, 1, 1, 0]]
-    assert cellular_automata.update_grid(grid, border_type) == expected
-    assert cellular_automata.update_grid(expected, border_type) == grid
+    expected_1 = [[0, 1, 1, 0],
+                  [1, 0, 0, 1],
+                  [0, 1, 1, 0]]
+    expected_2 = [[0, 0, 0, 0],
+                  [0, 0, 0, 0],
+                  [0, 0, 0, 0]]
+    expected_3 = [[0, 0, 0, 0],
+                  [1, 0, 0, 1],
+                  [0, 0, 0, 0]]    
+    
+    assert cellular_automata.update_grid(grid, 'death') == expected_1
+    assert cellular_automata.update_grid(expected_1, 'death') == grid
+    assert cellular_automata.update_grid(grid, 'alive') == expected_2
+    assert cellular_automata.update_grid(expected_2, 'alive') == expected_1  
+    assert cellular_automata.update_grid(grid, 'reflective') == expected_3
+    assert cellular_automata.update_grid(expected_3, 'reflective') == expected_2  
+    assert cellular_automata.update_grid(grid, 'toroidal') == expected_3
+    assert cellular_automata.update_grid(expected_3, 'toroidal') == expected_2  
 
 
 def test_loaf():
@@ -537,12 +658,39 @@ def test_loaf():
             [1, 0, 0, 1],
             [0, 1, 0, 1],
             [0, 0, 1, 0]]
-    expected = [[0, 1, 1, 0],
-                [1, 0, 0, 1],
-                [0, 1, 0, 1],
-                [0, 0, 1, 0]]
-    assert cellular_automata.update_grid(grid, border_type) == expected
-    assert cellular_automata.update_grid(expected, border_type) == grid
+    expected_1 = [[0, 1, 1, 0],
+                  [1, 0, 0, 1],
+                  [0, 1, 0, 1],
+                  [0, 0, 1, 0]]
+    expected_2 = [[0, 0, 0, 0],
+                  [0, 0, 0, 0],
+                  [0, 1, 0, 0],
+                  [0, 0, 0, 0]]
+    expected_3 = [[0, 1, 1, 0],
+                  [0, 0, 0, 1],
+                  [0, 0, 0, 1],
+                  [0, 0, 0, 0]]
+    expected_4 = [[0, 0, 0, 0],
+                  [1, 0, 0, 0],
+                  [1, 1, 0, 0],
+                  [0, 1, 1, 0]]
+    expected_5 = [[0, 0, 0, 0],
+                  [0, 1, 0, 0],
+                  [0, 0, 1, 0],
+                  [0, 0, 0, 0]]
+    expected_6 = [[1, 1, 1, 0],
+                  [0, 0, 0, 1],
+                  [0, 1, 0, 1],
+                  [1, 0, 0, 1]]
+                  
+    assert cellular_automata.update_grid(grid, 'death') == expected_1
+    assert cellular_automata.update_grid(expected_1, 'death') == grid
+    assert cellular_automata.update_grid(grid, 'alive') == expected_2
+    assert cellular_automata.update_grid(expected_2, 'alive') == expected_3
+    assert cellular_automata.update_grid(grid, 'reflective') == expected_4
+    assert cellular_automata.update_grid(expected_4, 'reflective') == expected_5
+    assert cellular_automata.update_grid(grid, 'toroidal') == expected_6
+    assert cellular_automata.update_grid(expected_6, 'toroidal') == expected_3
 
 
 def test_glider():
@@ -567,7 +715,65 @@ def test_glider():
                 [0, 0, 1, 0],
                 [0, 0, 0, 1],
                 [0, 1, 1, 1]]
-    assert cellular_automata.update_grid(state_0, border_type) == state_1
-    assert cellular_automata.update_grid(state_1, border_type) == state_2
-    assert cellular_automata.update_grid(state_2, border_type) == state_3
-    assert cellular_automata.update_grid(state_3, border_type) == state_4
+    
+    assert cellular_automata.update_grid(state_0, 'death') == state_1
+    assert cellular_automata.update_grid(state_1, 'death') == state_2
+    assert cellular_automata.update_grid(state_2, 'death') == state_3
+    assert cellular_automata.update_grid(state_3, 'death') == state_4
+
+    state_1b = [[0, 0, 0, 0],
+                [0, 0, 1, 0],
+                [0, 1, 1, 0],
+                [0, 0, 0, 0]]
+    state_2b = [[0, 0, 0, 0],
+                [0, 1, 1, 0],
+                [0, 1, 1, 0],
+                [0, 0, 0, 0]]
+    
+    assert cellular_automata.update_grid(state_0, 'alive') == state_1b
+    assert cellular_automata.update_grid(state_1b, 'alive') == state_2b
+    assert cellular_automata.update_grid(state_2b, 'alive') == state_2b
+
+    state_1c = [[0, 1, 1, 0],
+                [0, 0, 1, 0],
+                [1, 1, 1, 0],
+                [1, 1, 0, 0]]
+    state_2c = [[0, 0, 0, 1],
+                [0, 0, 0, 1],
+                [0, 0, 1, 0],
+                [0, 0, 0, 0]]
+    state_3c = [[0, 0, 1, 0],
+                [0, 0, 1, 0],
+                [0, 0, 0, 1],
+                [0, 0, 0, 0]]
+    state_4c = [[0, 1, 1, 1],
+                [0, 0, 1, 0],
+                [0, 0, 0, 1],
+                [0, 0, 0, 0]]
+    
+    assert cellular_automata.update_grid(state_0, 'reflective') == state_1c
+    assert cellular_automata.update_grid(state_1c, 'reflective') == state_2c
+    assert cellular_automata.update_grid(state_2c, 'reflective') == state_3c
+    assert cellular_automata.update_grid(state_3c, 'reflective') == state_4c
+
+    state_1d = [[0, 0, 0, 0],
+                [1, 0, 1, 1],
+                [0, 1, 1, 1],
+                [1, 0, 1, 0]]
+    state_2d = [[1, 0, 1, 0],
+                [1, 0, 0, 0],
+                [0, 0, 0, 0],
+                [1, 0, 1, 0]]
+    state_3d = [[1, 0, 0, 0],
+                [0, 1, 0, 1],
+                [0, 1, 0, 1],
+                [0, 0, 0, 0]]
+    state_4d = [[1, 0, 0, 0],
+                [0, 1, 0, 1],
+                [0, 0, 0, 0],
+                [1, 0, 0, 0]]
+    
+    assert cellular_automata.update_grid(state_0, 'toroidal') == state_1d
+    assert cellular_automata.update_grid(state_1d, 'toroidal') == state_2d
+    assert cellular_automata.update_grid(state_2d, 'toroidal') == state_3d
+    assert cellular_automata.update_grid(state_3d, 'toroidal') == state_4d

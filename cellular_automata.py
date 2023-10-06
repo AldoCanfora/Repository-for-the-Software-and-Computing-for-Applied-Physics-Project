@@ -18,19 +18,7 @@ def initial_state_grid(width, height, seed_value):
     if width < 2 or height < 2:
         raise ValueError('Both dimensions of the grid must be >= 2, but are {} and {}'.format(width,height))
     np.random.seed(seed_value)
-    #init_state_grid = np.random.choice([0, 1],size=(height,width)) 
-
-    init_state_grid =    [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                          [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-                          [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-                          [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]]
-
+    init_state_grid = np.random.choice([0, 1],size=(height,width)) 
 
     return init_state_grid
 
@@ -52,6 +40,9 @@ def count_neighbors(grid, x, y, border_type):
     Returns:
         int: The count of alive neighbors based on the specified border type.
     """
+    if border_type not in ['death', 'alive', 'reflective', 'toroidal']:
+        raise ValueError("border_type must to be set as: death, alive, reflective or toroidal")
+    
     num_rows = len(grid)
     num_cols = len(grid[0])
  
@@ -80,13 +71,27 @@ def count_neighbors(grid, x, y, border_type):
             elif grid[neighbor_x][neighbor_y] == 1:
                 alive_neighbors += 1
 
-        elif border_type == 'symmetric':
-            neighbor_x = (x + dx) % num_rows if 0 <= (x + dx) < num_rows else (x - dx) % num_rows
-            neighbor_y = (y + dy) % num_cols if 0 <= (y + dy) < num_cols else (y - dy) % num_cols
+        
+        elif border_type == 'reflective':
+            neighbor_x = x + dx
+            neighbor_y = y + dy
+
+            # Implementation reflective borders
+            if neighbor_x < 0:
+                neighbor_x = -neighbor_x - 1
+            elif neighbor_x >= num_rows:
+                neighbor_x = num_rows - 1
+
+            if neighbor_y < 0:
+                neighbor_y = -neighbor_y - 1
+            elif neighbor_y >= num_cols:
+                neighbor_y = num_cols - 1
+
             if grid[neighbor_x][neighbor_y] == 1:
                 alive_neighbors += 1
 
-        elif border_type == 'circular':
+
+        elif border_type == 'toroidal':
             neighbor_x = (x + dx) % num_rows
             neighbor_y = (y + dy) % num_cols
             if grid[neighbor_x][neighbor_y] == 1:
