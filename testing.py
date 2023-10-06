@@ -14,6 +14,10 @@ def height():
 def seed_value():
     return 1
 
+@pytest.fixture
+def borders():
+    return 'death'
+
 def test_initial_state_grid(width,height,seed_value):
     """
 Test the initialization of the cellular automaton grid.
