@@ -18,53 +18,85 @@ def initial_state_grid(width, height, seed_value):
     if width < 2 or height < 2:
         raise ValueError('Both dimensions of the grid must be >= 2, but are {} and {}'.format(width,height))
     np.random.seed(seed_value)
-    init_state_grid = np.random.choice([0, 1],size=(height,width)) 
+    #init_state_grid = np.random.choice([0, 1],size=(height,width)) 
+
+    init_state_grid =    [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
+                          [0, 0, 0, 0, 1, 0, 0, 0, 0, 0]]
+
+
     return init_state_grid
 
 
-def count_neighbors(grid, x, y):
+def count_neighbors(grid, x, y, border_type):
     """
-    Count the number of alive neighbors for a cell in a binary grid.
+    Counts the number of alive neighbors of a cell in a 2D grid based on the specified border type.
 
-    Parameters:
-        grid (list): The binary grid representing the current state.
-        x (int): The x-coordinate of the cell to count neighbors for.
-        y (int): The y-coordinate of the cell to count neighbors for.
+    Args:
+        grid (list of list): A 2D grid represented as a list of lists where 1 represents an alive cell and 0 represents a dead cell.
+        x (int): The row index of the cell for which neighbors are to be counted.
+        y (int): The column index of the cell for which neighbors are to be counted.
+        border_type (str): A string indicating the border type to consider for counting neighbors. 
+            - 'death': Consider only cells within the grid boundaries as alive neighbors.
+            - 'alive': Treat cells outside the grid boundaries as alive neighbors.
+            - 'symmetric': Consider neighbors in a symmetric manner, wrapping around the grid if necessary.
+            - 'circular': Wrap around the grid to count neighbors.
 
     Returns:
-        int: The number of alive neighbors (value equal to 1) for the specified cell.
-
-    Note:
-        This function counts the number of alive neighbors for a cell in the grid.
-        It considers the 8 neighboring cells (top, bottom, left, right, and diagonals).
-
-    Examples:
-        Given a binary grid, you can use this function to count the number of alive neighbors for a specific cell.
-        alive_neighbors = count_neighbors(binary_grid, x, y)
+        int: The count of alive neighbors based on the specified border type.
     """
     num_rows = len(grid)
     num_cols = len(grid[0])
+ 
+    neighbor_offsets = [
+        (-1, -1), (-1, 0), (-1, 1),
+        (0, -1),           (0, 1),
+        (1, -1), (1, 0), (1, 1)
+    ]
+
+    alive_neighbors = 0
+
+    for dx, dy in neighbor_offsets:
+        if border_type == 'death':
+            neighbor_x = x + dx
+            neighbor_y = y + dy
+            if 0 <= neighbor_x < num_rows and 0 <= neighbor_y < num_cols:
+                if grid[neighbor_x][neighbor_y] == 1:
+                    alive_neighbors += 1
     
-    # Check if coordinates are valid
-    is_valid_coord = lambda i, j: 0 <= i < num_rows and 0 <= j < num_cols
+        elif border_type == 'alive':
+            neighbor_x = x + dx
+            neighbor_y = y + dy
+            # If the neighbor is al out of the grid, consider it as alive(1)
+            if not (0 <= neighbor_x < num_rows) or not (0 <= neighbor_y < num_cols):
+                alive_neighbors += 1
+            elif grid[neighbor_x][neighbor_y] == 1:
+                alive_neighbors += 1
 
-    # Compute value of neighbor if coordinat is valid, otherwise return 0
-    get_neighbor_value = lambda i, j: grid[i][j] if is_valid_coord(i, j) else 0
+        elif border_type == 'symmetric':
+            neighbor_x = (x + dx) % num_rows if 0 <= (x + dx) < num_rows else (x - dx) % num_rows
+            neighbor_y = (y + dy) % num_cols if 0 <= (y + dy) < num_cols else (y - dy) % num_cols
+            if grid[neighbor_x][neighbor_y] == 1:
+                alive_neighbors += 1
 
-    # Generate a list of neighbors's values
-    alive_neighbors = sum(
-        get_neighbor_value(x+i, y+j) == 1
-        for i in range(-1, 2)
-        for j in range(-1, 2)
-        if not (i == 0 and j == 0)
-    )
+        elif border_type == 'circular':
+            neighbor_x = (x + dx) % num_rows
+            neighbor_y = (y + dy) % num_cols
+            if grid[neighbor_x][neighbor_y] == 1:
+                alive_neighbors += 1
 
     return alive_neighbors
 
 
-
 # to update grid according to rules
-def update_cell(grid, x, y):
+def update_cell(grid, x, y, border_type):
     """
     Update the state of a cell in a binary grid based on Conway's Game of Life rules.
 
@@ -86,13 +118,13 @@ def update_cell(grid, x, y):
         If grid[x][y] == 1 (live cell) and count_neighbors(grid, x, y) is not 2 or 3, the cell dies (returns 0).
         If grid[x][y] == 0 (dead cell) and count_neighbors(grid, x, y) is 3, the cell becomes alive (returns 1).
     """
-    count = count_neighbors(grid, x, y)
+    count = count_neighbors(grid, x, y, border_type)
     if grid[x][y] == 1: # considering live cells
         return 1 if count in [2, 3] else 0
     else: # considering death cells
         return 1 if count == 3 else 0
 
-def update_grid_death_borders(grid):
+def update_grid(grid, border_type):
     """
     Update the entire binary grid based on Conway's Game of Life rules with death borders.
 
@@ -110,132 +142,5 @@ def update_grid_death_borders(grid):
         Given an initial grid, you can use this function to obtain the next generation grid.
         updated_grid = update_grid(initial_grid)
     """
-    return [[update_cell(grid, i, j) for j in range(len(grid[0]))] for i in range(len(grid))]
+    return [[update_cell(grid, i, j, border_type) for j in range(len(grid[0]))] for i in range(len(grid))]
 
-
-def update_grid_circular_borders(grid):
-    """
-    Update the entire binary grid based on Conway's Game of Life rules with wraparound borders.
-
-    Parameters:
-        grid (list): The binary grid representing the current state.
-
-    Returns:
-        list: A new binary grid representing the updated state based on the rules.
-
-    Note:
-        This function applies the rules of Conway's Game of Life to each cell in the input grid
-        and generates a new grid as the next state with wraparound borders.
-
-    Examples:
-        Given an initial grid, you can use this function to obtain the next generation grid.
-        updated_grid = update_grid(initial_grid)
-    """
-    num_rows = len(grid)
-    num_cols = len(grid[0])
-    
-    # Create an extended grid with wraparound borders
-    extended_grid = [[grid[i][j] for j in range(num_cols)] for i in range(num_rows)]
-    
-    # Extend rows to wraparound
-    extended_grid.insert(0, extended_grid[-1])
-    extended_grid.append(extended_grid[1])
-    
-    # Extend columns to wraparound
-    for row in extended_grid:
-        row.insert(0, row[-1])
-        row.append(row[1])
-    
-    # Calculate the updated state based on the rules
-    new_grid = [[update_cell(extended_grid, i, j) for j in range(1, num_cols + 1)] for i in range(1, num_rows + 1)]
-    
-    return new_grid
-
-
-def update_grid_symmetric_borders(grid):
-    """
-    Update the entire binary grid based on Conway's Game of Life rules with symmetric borders.
-
-    Parameters:
-        grid (list): The binary grid representing the current state.
-
-    Returns:
-        list: A new binary grid representing the updated state based on the rules with symmetric borders.
-
-    Note:
-        This function applies the rules of Conway's Game of Life to each cell in the input grid
-        and generates a new grid as the next state with symmetric borders.
-
-    Examples:
-        Given an initial grid, you can use this function to obtain the next generation grid.
-        updated_grid = update_grid_symmetric_borders(initial_grid)
-    """
-    num_rows = len(grid)
-    num_cols = len(grid[0])
-
-    # Calculate the updated state based on the rules
-    new_grid = [[update_cell(grid, i, j) for j in range(num_cols)] for i in range(num_rows)]
-
-    # Set border cells to match their symmetric counterparts
-    for i in range(num_rows):
-        for j in range(num_cols):
-            if i == 0:
-                # Top border
-                new_i = num_rows - 1
-            elif i == num_rows - 1:
-                # Bottom border
-                new_i = 0
-            else:
-                new_i = i
-
-            if j == 0:
-                # Left border
-                new_j = num_cols - 1
-            elif j == num_cols - 1:
-                # Right border
-                new_j = 0
-            else:
-                new_j = j
-
-            new_grid[i][j] = new_grid[new_i][new_j]
-
-    return new_grid
-
-
-
-
-
-def update_grid_alive_borders(grid):
-    """
-    Update the entire binary grid based on Conway's Game of Life rules with all alive borders.
-
-    Parameters:
-        grid (list): The binary grid representing the current state.
-
-    Returns:
-        list: A new binary grid representing the updated state based on the rules with all alive borders.
-
-    Note:
-        This function applies the rules of Conway's Game of Life to each cell in the input grid
-        and generates a new grid as the next state with all alive borders.
-
-    Examples:
-        Given an initial grid, you can use this function to obtain the next generation grid.
-        updated_grid = update_grid_all_alive(initial_grid)
-    """
-    num_rows = len(grid)
-    num_cols = len(grid[0])
-
-    # Calculate the updated state based on the rules
-    new_grid = [[update_cell(grid, i, j) for j in range(num_cols)] for i in range(num_rows)]
-
-    # Set all border cells to alive
-    for i in range(num_rows):
-        new_grid[i][0] = 1
-        new_grid[i][num_cols - 1] = 1
-
-    for j in range(num_cols):
-        new_grid[0][j] = 1
-        new_grid[num_rows - 1][j] = 1
-
-    return new_grid
