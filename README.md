@@ -33,18 +33,12 @@ The allowed border_types are:
 - toroidal : The grid is considered to be wrapped around itself both horizontally and vertically so that there is no real "off grid".
 
 The actual grid used in [cellular_automata_visualization](cellular_automata_visualization.py) is scaled by going to divide both WIDTH and HEIGHT by 10, approximating the result by default to the nearest integer.
-In the file [cellular_automata](cellular_automata.py) there are functions to set randomly a configuration of alive or death cells in the grid, count neighbors, implement game of life's rules and update the state of the grid.
-In the file [cellular_automata_visualization](cellular_automata_visualization.py) there is the pygame code to show the window where we can se the updating of the states of the game of life.
-Then, to start the Conway's Game of Life algortihm the user has to launch the file [cellular_automata](cellular_automata.py) which imports its parameters from [configuration](configuration.txt). 
-Running the file [cellular_automata](cellular_automata.py), with the command entered by the user **"python cellular_automata.py"**, through Pygame library, will display a window where you can see the time evolution of the Conway's Game of Life.
 
 This is how I divided my project into blocks:
 
 - In the file [cellular_automata](cellular_automata.py) I have built the Conway's Game of life functions that randomly initialize the grid, count the number of neighbors in each cell, update the grid state.
 - In the file [cellular_automata_visualization](cellular_automata_visualization.py) there is the pygame code to show the window where we can se the updating of the states of the game of life.
-
 - In the file [testing](testing.py) I have tested all the [cellular_automata](cellular_automata.py) functions to ensure that all of them work properly, using differet assert based on border_type parameters. For the other functions to be tested, I used examples of grids on which to make asserts. In addition, I included testing functions for special cases, such as all live cells or all death cells and emergent forms.
-
 - In the file [configuration](configuration.txt) there are the definitions of the parameters used in the [cellular_automata](cellular_automata.py) and [testing](testing.py), there are definitions of WIDTH, HEIGHT, seed_value and border_type.
   
 ## Results of the project
