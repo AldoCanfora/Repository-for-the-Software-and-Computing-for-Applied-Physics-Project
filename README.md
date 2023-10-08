@@ -12,7 +12,8 @@ Next, installation of the following libraries is required:<br>
 
 The pytest library is required only for testing functions of [testing](testing.py).
 
-To view the output of the project run the following code from the terminal: **"python cellular_automata_visualization.py"**
+To view the output of the project run the following code from the terminal:<br> 
+**"python cellular_automata_visualization.py"**
   
 Then enter from the terminal the name of the configuration file you want to use, if you do not want to add a new configuration file you can type in the default one which is configuration.txt .
 After entering the name of the configuration file you intend to use from the terminal, the pygame window appears on the screen and you can view the evolution of Conway's game of life with the [configuration](configuration.txt) parameters entered.
