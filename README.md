@@ -5,7 +5,7 @@ In order to use the project, Git must be installed.
 Then type the following command from the terminal:  
 - git clone https://github.com/AldoCanfora/Repository-for-the-Software-and-Computing-for-Applied-Physics-Project
   
-Next, installation of the following libraries is required:
+Next, installation of the following libraries is required:<br>
 -numpy<br>
 -pygame<br>
 -pytest
