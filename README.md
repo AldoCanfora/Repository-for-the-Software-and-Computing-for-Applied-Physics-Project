@@ -1,6 +1,26 @@
 # Repository-for-the-Software-and-Computing-for-Applied-Physics-Project
 This repository is intended to be a simulation of Conway's Game of life. The goal of the project is to obtain a Pygame window in which the evolution of the cellular automaton (i.e. Conway's game of life) is shown state by state in real time.
+First, it is advisable to create a virtual environment within a new folder in which you want to run the project.
+In order to use the project, Git must be installed. 
+Then type the following command from the terminal:  
+- git clone https://github.com/AldoCanfora/Repository-for-the-Software-and-Computing-for-Applied-Physics-Project
+Next, installation of the following libraries is required:
+-numpy
+-pygame
+-pytest
+The pytest library is required only for testing functions of [testing](testing.py).
 
+Modify the [configuration](configuration.txt) file to use a different size for the simulation grid, a different seed for random cells generation, and a different border_type for a different state configuration of the outer edges of the grid.
+The allowed border_types are:
+- death : cells outside the grid are all considered dead;
+- alive : cells outside the grid are considered all alive;
+- reflective : cells outside the grid assume the same state as the adjacent cell laterally;
+- toroidal : The grid is considered to be wrapped around itself both horizontally and vertically so that there is no real "off grid".
+  
+To view the output of the project run the following code from the terminal:
+- python cellular_automata_visualization.py
+Then enter from the terminal the name of the configuration file you want to use, if you do not want to add a new configuration file you can type in the default one which is configuration.txt .
+After entering the name of the configuration file you intend to use from the terminal, the pygame window appears on the screen and you can view the evolution of Conway's game of life with the [configuration](configuration.txt) parameters entered.
 
 ## Cellular Automaton
 A cellular automaton is a discrete model of computation studied in automata theory. 
@@ -86,7 +106,7 @@ Therefore important feature of gliders is their movement in cellular grid. Figur
 ## Structure of the project
 These are the steps in order to start the program and to plot the results:
 
-First, the user has to choose between the different dimension of the grid (in our case there is only one, [configuration](configuration.txt)) and eventually write a new one, using the syntax of configuration; if the user wants to do so, he has to specify the grid parameters (WIDTH, HEIGHT). The actual grid used in [cellular_automata](cellular_automata.py) is scaled by going to divide both WIDTH and HEIGHT by 10, approximating the result by default to the nearest integer. The minimum selectable values WIDTH and HEIGHT are greater than 20, to have a grid of at least 2 by 2.
+First, the user has to choose between the different dimension of the grid (in our case there is only one, [configuration](configuration.txt) and eventually write a new one, using the syntax of configuration; if the user wants to do so, he has to specify the grid parameters (WIDTH, HEIGHT). The actual grid used in [cellular_automata](cellular_automata.py) is scaled by going to divide both WIDTH and HEIGHT by 10, approximating the result by default to the nearest integer. The minimum selectable values WIDTH and HEIGHT are greater than 20, to have a grid of at least 2 by 2.
 Then, to start the Conway's Game of Life algortihm the user has to launch the file [cellular_automata](cellular_automata.py) which imports its parameters from [configuration](configuration.txt). 
 Running the file [cellular_automata](cellular_automata.py), with the command entered by the user **"python cellular_automata.py"**, through Pygame library, will display a window where you can see the time evolution of the Conway's Game of Life.
 
