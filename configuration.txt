@@ -1,4 +1,4 @@
-WIDTH=100
-HEIGHT=100
+WIDTH=1000
+HEIGHT=700
 seed_value=1
-border_type=reflective
+border_type=toroidal
