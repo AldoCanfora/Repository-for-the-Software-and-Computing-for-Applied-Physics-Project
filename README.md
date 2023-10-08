@@ -6,9 +6,9 @@ Then type the following command from the terminal:
 - git clone https://github.com/AldoCanfora/Repository-for-the-Software-and-Computing-for-Applied-Physics-Project
   
 Next, installation of the following libraries is required:
--numpy;
--pygame;
--pytest.
+-numpy<br>
+-pygame<br>
+-pytest
 
 The pytest library is required only for testing functions of [testing](testing.py).
 
