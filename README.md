@@ -12,18 +12,41 @@ Next, installation of the following libraries is required:<br>
 
 The pytest library is required only for testing functions of [testing](testing.py).
 
-Modify the [configuration](configuration.txt) file to use a different size for the simulation grid, a different seed for random cells generation, and a different border_type for a different state configuration of the outer edges of the grid.
+To view the output of the project run the following code from the terminal: **"python cellular_automata_visualization.py"**
+  
+Then enter from the terminal the name of the configuration file you want to use, if you do not want to add a new configuration file you can type in the default one which is configuration.txt .
+After entering the name of the configuration file you intend to use from the terminal, the pygame window appears on the screen and you can view the evolution of Conway's game of life with the [configuration](configuration.txt) parameters entered.
+
+## Structure of the project
+These are the steps in order to start the program and to show the results:
+
+Modify the [configuration](configuration.txt) file to use a different configurations fot the outuput. The parameterts are:<br>
+- WIDTH and HEIGHT: for the size of the grid, the minimum selectable values WIDTH and HEIGHT are greater than 20, to have a grid of at least 2 by 2;
+- seed_value: for random cells generation;
+- border_type: for a different state configuration of the outer edges of the grid.<br>
 The allowed border_types are:
 - death : cells outside the grid are all considered dead;
 - alive : cells outside the grid are considered all alive;
 - reflective : cells outside the grid assume the same state as the adjacent cell laterally;
 - toroidal : The grid is considered to be wrapped around itself both horizontally and vertically so that there is no real "off grid".
+
+The actual grid used in [cellular_automata_visualization](cellular_automata_visualization.py) is scaled by going to divide both WIDTH and HEIGHT by 10, approximating the result by default to the nearest integer.
+In the file [cellular_automata](cellular_automata.py) there are functions to set randomly a configuration of alive or death cells in the grid, count neighbors, implement game of life's rules and update the state of the grid.
+In the file [cellular_automata_visualization](cellular_automata_visualization.py) there is the pygame code to show the window where we can se the updating of the states of the game of life.
+Then, to start the Conway's Game of Life algortihm the user has to launch the file [cellular_automata](cellular_automata.py) which imports its parameters from [configuration](configuration.txt). 
+Running the file [cellular_automata](cellular_automata.py), with the command entered by the user **"python cellular_automata.py"**, through Pygame library, will display a window where you can see the time evolution of the Conway's Game of Life.
+
+This is how I divided my project into blocks:
+
+- In the file [cellular_automata](cellular_automata.py) I have built the Conway's Game of life functions that randomly initialize the grid, count the number of neighbors in each cell, update the grid state.
+- In the file [cellular_automata_visualization](cellular_automata_visualization.py) there is the pygame code to show the window where we can se the updating of the states of the game of life.
+
+- In the file [testing](testing.py) I have tested all the [cellular_automata](cellular_automata.py) functions to ensure that all of them work properly, using differet assert based on border_type parameters. For the other functions to be tested, I used examples of grids on which to make asserts. In addition, I included testing functions for special cases, such as all live cells or all death cells and emergent forms.
+
+- In the file [configuration](configuration.txt) there are the definitions of the parameters used in the [cellular_automata](cellular_automata.py) and [testing](testing.py), there are definitions of WIDTH, HEIGHT, seed_value and border_type.
   
-To view the output of the project run the following code from the terminal:
-- python cellular_automata_visualization.py
-  
-Then enter from the terminal the name of the configuration file you want to use, if you do not want to add a new configuration file you can type in the default one which is configuration.txt .
-After entering the name of the configuration file you intend to use from the terminal, the pygame window appears on the screen and you can view the evolution of Conway's game of life with the [configuration](configuration.txt) parameters entered.
+## Results of the project
+In the [images](images) folder I have included some images to understand Conway's Game of life theory and an example of the output of [cellular_automata_visualization](cellular_automata_visualization.py).
 
 ## Cellular Automaton
 A cellular automaton is a discrete model of computation studied in automata theory. 
@@ -106,23 +129,7 @@ and after one period come back to initial pattern and this procedure continues.
 Therefore important feature of gliders is their movement in cellular grid. Figure above shows a glider whit period 4. 
 
 
-## Structure of the project
-These are the steps in order to start the program and to plot the results:
 
-First, the user has to choose between the different dimension of the grid (in our case there is only one, [configuration](configuration.txt) and eventually write a new one, using the syntax of configuration; if the user wants to do so, he has to specify the grid parameters (WIDTH, HEIGHT). The actual grid used in [cellular_automata](cellular_automata.py) is scaled by going to divide both WIDTH and HEIGHT by 10, approximating the result by default to the nearest integer. The minimum selectable values WIDTH and HEIGHT are greater than 20, to have a grid of at least 2 by 2.
-Then, to start the Conway's Game of Life algortihm the user has to launch the file [cellular_automata](cellular_automata.py) which imports its parameters from [configuration](configuration.txt). 
-Running the file [cellular_automata](cellular_automata.py), with the command entered by the user **"python cellular_automata.py"**, through Pygame library, will display a window where you can see the time evolution of the Conway's Game of Life.
-
-This is how I divided my project into blocks:
-
-- In the file [cellular_automata](cellular_automata.py) I have built the Conway's Game of life functions that initialize the grid, count the number of neighbors in each cell, update the grid state, display the grid state in real time. 
-
-- In the file [testing](testing.py) I have tested all the [cellular_automata](cellular_automata.py) functions to ensure that all of them work properly, using hypothesis testing for the test function about the initialization of the grid. For the other functions to be tested, I used examples of grids on which to make asserts. In addition, I included testing functions for special cases, such as all live cells or all death cells, and emergent forms.
-
-- In the file [configuration](configuration.txt) there are the definitions of the parameters used in the [cellular_automata](cellular_automata.py) e [testing](testing.py), there are definitions of the grid size measurement WIDTH and HEIGHT.
-  
-
-In the [images](images) folder I have included some images to understand Conway's Game of life theory and an example of the output of [cellular_automata](cellular_automata.py).
 
 In the figure below I show a frame of a state of the [cellular_automata](cellular_automata.py) viewed through the Pygame window.
 ![config](./images/conway_s_game_of_life_algorithm_frame_output.jpg)
