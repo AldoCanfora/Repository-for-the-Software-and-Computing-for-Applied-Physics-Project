@@ -3,7 +3,7 @@ This repository is intended to be a simulation of Conway's Game of life. The goa
 First, it is advisable to create a virtual environment within a new folder in which you want to run the project.
 In order to use the project, Git must be installed. 
 Then type the following command from the terminal:<br>  
-**"git clone https://github.com/AldoCanfora/Repository-for-the-Software-and-Computing-for-Applied-Physics-Project"**
+"git clone https://github.com/AldoCanfora/Repository-for-the-Software-and-Computing-for-Applied-Physics-Project"
   
 Next, installation of the following libraries is required:<br>
 -numpy<br>
