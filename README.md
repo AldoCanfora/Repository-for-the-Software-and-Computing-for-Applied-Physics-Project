@@ -1,4 +1,6 @@
 # Repository-for-the-Software-and-Computing-for-Applied-Physics-Project
+This repository is intended to be a simulation of Conway's Game of life. The goal of the project is to obtain a Pygame window in which the evolution of the cellular automaton (i.e. Conway's game of life) is shown state by state in real time.
+
 
 ## Cellular Automaton
 A cellular automaton is a discrete model of computation studied in automata theory. 
