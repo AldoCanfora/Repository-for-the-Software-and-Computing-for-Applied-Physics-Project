@@ -20,6 +20,9 @@ Then enter from the terminal the name of the configuration file you want to use,
 
 After entering the name of the configuration file you intend to use from the terminal, the pygame window appears on the screen and you can view the evolution of Conway's game of life with the [configuration](configuration.txt) parameters entered.
 
+To check if the code works properly it's possible to type in the terminal the following command:<br>
+**"pytest testing.py"**
+
 ## Structure of the project
 These are the steps in order to start the program and to show the results:
 
