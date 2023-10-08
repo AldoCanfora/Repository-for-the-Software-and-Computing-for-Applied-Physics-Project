@@ -151,5 +151,14 @@ def update_grid(grid, border_type):
         Given an initial grid, you can use this function to obtain the next generation grid.
         updated_grid = update_grid(initial_grid)
     """
-    return [[update_cell(grid, i, j, border_type) for j in range(len(grid[0]))] for i in range(len(grid))]
+    #return [[update_cell(grid, i, j, border_type) for j in range(len(grid[0]))] for i in range(len(grid))]
+    shape = grid.shape
+
+    # Define a vectorized version of update_cell to apply to each element in the grid
+    vectorized_update_cell = np.vectorize(lambda i, j: update_cell(grid, i, j, border_type))
+
+    # Create an updated grid by applying vectorized_update_cell to each pair of indices
+    updated_grid = np.fromfunction(vectorized_update_cell, shape, dtype=np.int8)
+
+    return updated_grid
 
