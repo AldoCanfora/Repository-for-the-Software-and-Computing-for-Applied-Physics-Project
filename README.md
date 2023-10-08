@@ -24,7 +24,8 @@ These are the steps in order to start the program and to show the results:
 Modify the [configuration](configuration.txt) file to use a different configurations fot the outuput. The parameterts are:<br>
 - WIDTH and HEIGHT: for the size of the grid, the minimum selectable values WIDTH and HEIGHT are greater than 20, to have a grid of at least 2 by 2;
 - seed_value: for random cells generation;
-- border_type: for a different state configuration of the outer edges of the grid.<br>
+- border_type: for a different state configuration of the outer edges of the grid.
+
 The allowed border_types are:
 - death : cells outside the grid are all considered dead;
 - alive : cells outside the grid are considered all alive;
