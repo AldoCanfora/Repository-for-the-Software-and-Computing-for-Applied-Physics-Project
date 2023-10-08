@@ -4,10 +4,12 @@ First, it is advisable to create a virtual environment within a new folder in wh
 In order to use the project, Git must be installed. 
 Then type the following command from the terminal:  
 - git clone https://github.com/AldoCanfora/Repository-for-the-Software-and-Computing-for-Applied-Physics-Project
+  
 Next, installation of the following libraries is required:
 -numpy
 -pygame
 -pytest
+
 The pytest library is required only for testing functions of [testing](testing.py).
 
 Modify the [configuration](configuration.txt) file to use a different size for the simulation grid, a different seed for random cells generation, and a different border_type for a different state configuration of the outer edges of the grid.
@@ -19,6 +21,7 @@ The allowed border_types are:
   
 To view the output of the project run the following code from the terminal:
 - python cellular_automata_visualization.py
+  
 Then enter from the terminal the name of the configuration file you want to use, if you do not want to add a new configuration file you can type in the default one which is configuration.txt .
 After entering the name of the configuration file you intend to use from the terminal, the pygame window appears on the screen and you can view the evolution of Conway's game of life with the [configuration](configuration.txt) parameters entered.
 
