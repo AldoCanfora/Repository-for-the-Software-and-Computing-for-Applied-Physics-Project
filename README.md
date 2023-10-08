@@ -44,6 +44,9 @@ This is how I divided my project into blocks:
 ## Results of the project
 In the [images](images) folder I have included some images to understand Conway's Game of life theory and an example of the output of [cellular_automata_visualization](cellular_automata_visualization.py).
 
+In the figure below I show a frame of a state of the [cellular_automata](cellular_automata.py) viewed through the Pygame window.
+![config](./images/conway_s_game_of_life_algorithm_frame_output.jpg)
+
 ## Cellular Automaton
 A cellular automaton is a discrete model of computation studied in automata theory. 
 Cellular automata have found application in various areas, including physics, theoretical
@@ -127,8 +130,6 @@ Therefore important feature of gliders is their movement in cellular grid. Figur
 
 
 
-In the figure below I show a frame of a state of the [cellular_automata](cellular_automata.py) viewed through the Pygame window.
-![config](./images/conway_s_game_of_life_algorithm_frame_output.jpg)
 
 
 
