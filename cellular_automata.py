@@ -23,25 +23,29 @@ def initial_state_grid(width, height, seed_value):
     return init_state_grid
 
 
-def count_neighbors(grid, x, y, border_type):
-    """
-    Counts the number of alive neighbors of a cell in a 2D grid based on the specified border type.
+def count_neighbors(grid, x, y, border_type):#MODIFICA DOCSTIRNG AGGIUNGENDO I VARI PARAMETRI E IL RAISE VALUE
+    """    
+Counts the number of alive neighbors of a cell in a 2D grid based on the specified border type for Conway's game of life.
 
-    Args:
-        grid (list of list): A 2D grid represented as a list of lists where 1 represents an alive cell and 0 represents a dead cell.
-        x (int): The row index of the cell for which neighbors are to be counted.
-        y (int): The column index of the cell for which neighbors are to be counted.
-        border_type (str): A string indicating the border type to consider for counting neighbors. 
-            - 'death': Consider only cells within the grid boundaries as alive neighbors.
-            - 'alive': Treat cells outside the grid boundaries as alive neighbors.
-            - 'symmetric': Consider neighbors in a symmetric manner, wrapping around the grid if necessary.
-            - 'circular': Wrap around the grid to count neighbors.
+Args:
+    grid (list of list): A 2D grid represented as a list of lists where 1 represents an alive cell and 0 represents a dead cell.
+    x (int): The row index of the cell for which neighbors are to be counted.
+    y (int): The column index of the cell for which neighbors are to be counted.
+    border_type (str): A string indicating the border type to consider for counting neighbors.
+        - 'death': Count only cells within the grid boundaries as alive neighbors.
+        - 'alive': Treat cells outside the grid boundaries as alive neighbors.
+        - 'reflective': Consider neighbors in a reflective manner, mirroring at the grid edges.
+        - 'toroidal': Wrap around the grid to count neighbors.
 
-    Returns:
-        int: The count of alive neighbors based on the specified border type.
-    """
+Returns:
+    int: The count of alive neighbors based on the specified border type.
+
+Raises:
+    ValueError: If the `border_type` is not one of the valid options ('death', 'alive', 'reflective', 'toroidal').
+"""
+     
     if border_type not in ['death', 'alive', 'reflective', 'toroidal']:
-        raise ValueError("border_type must to be set as: death, alive, reflective or toroidal")
+        raise ValueError("border_type must to be set as: death, alive, reflective or toroidal")    
     
     num_rows = len(grid)
     num_cols = len(grid[0])
