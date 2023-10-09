@@ -1,3 +1,4 @@
+[settings]
 WIDTH=1000
 HEIGHT=700
 seed_value=1
