@@ -18,6 +18,7 @@ To view the output of the project, with the default configuration file [configur
   
 If you want to view the output of the project, with a different configuration file, run the following code from the terminal:<br> 
 "python cellular_automata_visualization.py configuration_name_file.txt"
+
 Remember to type [settings] at the top of the configuration_name_file.txt
 
 After entering the name of the configuration file you intend to use from the terminal, the pygame window appears on the screen and you can view the evolution of Conway's game of life with the [configuration](configuration.txt) parameters entered.
