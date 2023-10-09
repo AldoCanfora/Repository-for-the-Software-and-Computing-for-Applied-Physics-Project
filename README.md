@@ -9,6 +9,9 @@ Then type the following command from the terminal:
 Next, installation of the following libraries is required:<br>
 -numpy<br>
 -pygame<br>
+-sys<br>
+-configparser<br>
+-random<br>
 -pytest
 
 The pytest library is required only for testing functions of [testing](testing.py).
