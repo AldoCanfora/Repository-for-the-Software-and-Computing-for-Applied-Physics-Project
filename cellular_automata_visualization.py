@@ -1,5 +1,9 @@
 import cellular_automata
 import pygame
+import configparser
+import sys
+from sys import argv
+import random
 
 # Prompt the user to enter the filename
 if __name__ == "__main__":
@@ -30,24 +34,37 @@ if __name__ == "__main__":
     Author: Aldo Canfora
     Date: 04/10/2023
     """
-    filename = input("Enter configuration filename: ")
 
-    config_values = {}
-    try:
-        with open(filename, 'r') as config_file:
-            for line in config_file:
-                key, value = line.strip().split('=')
-                config_values[key] = value
-    except FileNotFoundError:
-        print(f"The file '{filename}' was not found.")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    config = configparser.ConfigParser()
 
-    WIDTH = int(config_values.get('WIDTH'))
-    HEIGHT = int(config_values.get('HEIGHT'))
-    seed_value = int(config_values.get('seed_value'))
-    border_type = config_values.get('border_type')
+    # Set a deafult configuration file name
+    default_config_file = 'configuration.txt'
+    # Check if a command-line argument for the configuration file name has been provided
+    if len(sys.argv) > 1:
+        config_file = sys.argv[1]
+    else:
+        # If no argument is provided, use the default configuration file name
+        config_file = default_config_file
 
+    config.read(config_file)
+
+    # Extract the value of seed_value from the configuration file, if present
+    seed_value = config.get('settings', 'seed_value', fallback=None)
+
+    # Check if seed_value is present in the configuration file
+    if seed_value is not None:
+        seed_value = int(seed_value)
+    else:
+        # If seed_value is not present, generate a random value
+        seed_value = random.randint(1, 1000)
+
+    WIDTH = config.get('settings', 'WIDTH')
+    HEIGHT = config.get('settings', 'HEIGHT')
+    border_type = config.get('settings', 'border_type')
+
+    WIDTH = int(WIDTH)
+    HEIGHT = int(HEIGHT)
+    seed_value = int(seed_value)
 
 
 """
@@ -64,6 +81,7 @@ Usage:
 Requirements:
 - pygame: You need to have pygame installed to run this script.
 """
+#main part of the code
 
 # Initialize pygame and window
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
